@@ -1,5 +1,15 @@
 @import '01-variables.less';
 
+@font-face {
+    font-family : 'Bebas Neue';
+    font-style  : normal;
+    font-weight : 400;
+    font-display: swap;
+    src         :
+        url('../webfonts/bebas-neue-v2-latin-regular.woff2') format('woff2'),
+        url('../webfonts/bebas-neue-v2-latin-regular.woff') format('woff'),
+}
+
 html {
     width     : 100%;
     max-width : 100%;
@@ -23,11 +33,11 @@ body {
 
     background-color: #fff;
 
-    font-family   : 'Rubik', Arial, sans-serif;
-    font-size     : var(--main-font-size);
+    font-family   : 'Bebas Neue', Arial, sans-serif;
+    font-size     : @font-size;
     font-weight   : 400;
-    color         : var(--main-font-color);
-    line-height   : var(--main-line-height);
+    color         : @font-color;
+    line-height   : @line-height;
     word-wrap     : break-word;
     letter-spacing: 0em;
 
@@ -67,6 +77,8 @@ button {
     margin : 0;
     padding: 0;
 
+    font: inherit;
+
     background-color: transparent;
     cursor          : pointer;
 }
@@ -83,7 +95,8 @@ button {
 }
 
 .container {
-    width  : 100%;
-    padding: 0 10px;
-    margin : 0 auto;
+    width    : 100%;
+    max-width: 1770px;
+    padding  : 0 10px;
+    margin   : 0 auto;
 }
