@@ -1,3 +1,5 @@
+@import './01-variables.less';
+
 .advantage {
   padding-top: 50px;
   padding-bottom: 50px;
@@ -16,6 +18,8 @@
     margin: 0 auto 30px;
     max-width: 700px;
 
+    font-family: @gotham-pro;
+    font-weight: 400;
     font-size: 18px;
     line-height: 120%;
   }
@@ -30,10 +34,13 @@
   &__item {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     width: 48%;
     padding: 105px 20px 0;
-    min-height: 215px;
+    min-height: 232px;
 
+    font-family: @gotham-pro;
+    font-weight: 400;
     font-size: 16px;
     line-height: 120%;
 
