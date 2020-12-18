@@ -1,5 +1,6 @@
 import burgerHandler from './burger';
 import phoneNumsHandler from './expandTelNum';
+import headerSlider from './slider';
 
 const btnBurger = $('.burger');
 const btnTopElem = $('.burger__elem_top');
@@ -25,6 +26,6 @@ expandPhoneBtn.on('click', function (e) {
 
     $(this).addClass('header__tel-btn_active');
     phoneNumsHandler.showAddNumbers(telContainer, phoneNumsHandler.numbers);
+});
 
-
-})
+headerSlider.mount();

@@ -1,16 +1,16 @@
 @import '01-variables.less';
 
 @font-face {
-  font-family: 'Bebas Neue';
-  font-style: normal;
-  font-weight: 400;
+  font-family : 'Bebas Neue';
+  font-style  : normal;
+  font-weight : 400;
   font-display: swap;
-  src: url('../webfonts/bebas-neue-v2-latin-regular.woff2') format('woff2'), url('../webfonts/bebas-neue-v2-latin-regular.woff') format('woff');
+  src         : url('../webfonts/bebas-neue-v2-latin-regular.woff2') format('woff2'), url('../webfonts/bebas-neue-v2-latin-regular.woff') format('woff');
 }
 
 html {
-  width: 100%;
-  max-width: 100%;
+  width     : 100%;
+  max-width : 100%;
   overflow-x: hidden;
 }
 
@@ -23,20 +23,20 @@ html {
 body {
   position: relative;
 
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  max-width: 100%;
+  margin    : 0;
+  padding   : 0;
+  width     : 100%;
+  max-width : 100%;
   overflow-x: hidden;
 
   background-color: #fff;
 
-  font-family: 'Bebas Neue', Arial, sans-serif;
-  font-size: @font-size;
-  font-weight: 400;
-  color: @font-color;
-  line-height: @line-height;
-  word-wrap: break-word;
+  font-family   : 'Bebas Neue', Arial, sans-serif;
+  font-size     : @font-size;
+  font-weight   : 400;
+  color         : @font-color;
+  line-height   : @line-height;
+  word-wrap     : break-word;
   letter-spacing: 0em;
 
   overflow-x: hidden;
@@ -44,20 +44,20 @@ body {
 
 img {
   max-width: 100%;
-  height: auto;
+  height   : auto;
 }
 
 a {
   text-decoration: none;
-  color: inherit;
-  font: inherit;
-  cursor: pointer;
+  color          : inherit;
+  font           : inherit;
+  cursor         : pointer;
 }
 
 ul {
   list-style: none;
-  padding: 0;
-  margin: 0;
+  padding   : 0;
+  margin    : 0;
 }
 
 h1,
@@ -65,45 +65,52 @@ h2,
 h3,
 p {
   padding: 0;
-  margin: 0;
+  margin : 0;
 
   font: inherit;
 }
 
 button {
-  border: none;
-  margin: 0;
+  border : none;
+  margin : 0;
   padding: 0;
 
   font: inherit;
 
   background-color: transparent;
-  cursor: pointer;
+  cursor          : pointer;
 }
 
 .visually-hidden {
   position: absolute !important;
-  clip: rect(1px 1px 1px 1px);
-  clip: rect(1px, 1px, 1px, 1px);
-  border: 0 !important;
-  height: 1px !important;
-  width: 1px !important;
-  padding: 0 !important;
+  clip    : rect(1px 1px 1px 1px);
+  clip    : rect(1px, 1px, 1px, 1px);
+  border  : 0 !important;
+  height  : 1px !important;
+  width   : 1px !important;
+  padding : 0 !important;
   overflow: hidden;
 }
 
 .container {
-  width: 100%;
+  width    : 100%;
   max-width: 1770px;
-  padding: 0 10px;
-  margin: 0 auto;
+  padding  : 0 10px;
+  margin   : 0 auto;
 }
 
 .title {
-  text-align: center;
-  font-size: @title-font-size;
+  text-align : center;
+  font-size  : @title-font-size;
   font-weight: @title-weight;
   line-height: @title-line-height;
+}
+
+@media(min-width: @tablet-width) {
+  .container {
+    padding: 0 30px;
+  }
+
 }
 
 @media (min-width: @desktop-width) {
