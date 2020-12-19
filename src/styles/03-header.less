@@ -208,6 +208,10 @@
     background-size  : cover;
 
     overflow: hidden;
+
+    &_sec {
+      display: none;
+    }
   }
 
   &__slide-wrapper {
@@ -472,6 +476,10 @@
       // transform: translateX(-50%);
     }
 
+    &__glide {
+      position: relative;
+    }
+
     &__slide {
       padding-right: 50px;
       padding-left : 50px;
@@ -488,8 +496,10 @@
     }
 
     &__text-wrapper {
-      width    : 70%;
-      max-width: 765px;
+      width       : 70%;
+      max-width   : 765px;
+      padding-top : 15px;
+      padding-left: 15px;
 
       &_sec {
         max-width: 530px;
@@ -502,7 +512,48 @@
 
     &__img-wrapper {
       position: relative;
-      top     : -100px;
+      top     : -200px;
+    }
+
+    &__arrows {
+      position : absolute;
+      top      : 50%;
+      transform: translateY(-50%);
+
+      display        : flex;
+      justify-content: space-between;
+      width          : 100%;
+      padding-left   : 10px;
+      padding-right  : 10px;
+
+
+
+      button:hover,
+      button:focus,
+      button:active {
+        outline: none;
+      }
+    }
+
+    &__btn-prev,
+    &__btn-next {
+      transition: background-image @link-effect;
+    }
+
+    &__btn-prev:hover,
+    &__btn-prev:focus,
+    &__btn-prev:active {
+      background-image   : url('../img/un-prev.png');
+      background-repeat  : no-repeat;
+      background-position: center;
+    }
+
+    &__btn-next:hover,
+    &__btn-next:focus,
+    &__btn-next:active {
+      background-image   : url('../img/un-next.png');
+      background-repeat  : no-repeat;
+      background-position: center;
     }
 
   }
@@ -586,6 +637,10 @@
       margin-left : auto;
       margin-right: auto;
     }
+
+    &__bullets {
+      bottom: 100px;
+    }
   }
 
   .navigation {
@@ -609,13 +664,31 @@
 
     &__img-wrapper {
       width          : calc(100% - 765px);
-      justify-content: flex-start;
+      justify-content: center;
       align-items    : center;
 
       img {
         transform       : scale(1.2);
         transform-origin: center top;
       }
+    }
+  }
+}
+
+@media(min-width: 1870px) {
+  .header {
+    &__glide {
+      width: 100%;
+    }
+
+    &__arrows {
+      left  : 0;
+      right : 0;
+      bottom: 0;
+
+      max-width: 1870px;
+      margin   : 0 auto;
+      padding  : 0;
     }
   }
 }

@@ -28,4 +28,7 @@ expandPhoneBtn.on('click', function (e) {
     phoneNumsHandler.showAddNumbers(telContainer, phoneNumsHandler.numbers);
 });
 
-headerSlider.mount();
+setTimeout(() => {
+    $('.header__slide_sec').css('display', 'flex');
+    headerSlider.mount();
+}, 500);
