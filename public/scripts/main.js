@@ -65,14 +65,7 @@
 
     };
 
-    let headerSlider = new Glide('.glide', {
-        type: 'carousel',
-        autoplay: 3000,
-        //direction: 'rtl',
-        animationTimingFunc: 'linear',
-        perView: 1,
-        // startAt: 1
-    });
+    // slider.headerSlider = new Glide('.glide', {
 
     const btnBurger = $('.burger');
     const btnTopElem = $('.burger__elem_top');
@@ -100,10 +93,73 @@
         phoneNumsHandler.showAddNumbers(telContainer, phoneNumsHandler.numbers);
     });
 
-    // setTimeout(() => {
-    //     $('.header__slide_sec').css('display', 'flex');
-    //     headerSlider.mount();
-    // }, 500);
+    let headerSliderSettings = {
+        loop: true,
+        items: 1,
+        dots: true,
+        dotsClass: 'header__bullets',
+        dotClass: 'header__bullet',
+        navContainerClass: 'arrows arrows_header',
+        navClass: ['arrow arrow_prev arrow_prev--header', 'arrow arrow_next arrow_next--header'],
+        responsive: {
+            0: {
+                nav: false,
+            },
+            1200: {
+                nav: true,
+            }
+        },
+    };
+    let headerTimerID;
+    let headerSlider = $('.header .owl-carousel');
+    function setRtlHeader() {
+        window.clearTimeout(headerTimerID);
+        headerTimerID = setTimeout(function f() {
+            headerSlider.trigger('prev.owl.carousel');
+            headerTimerID = setTimeout(f, 1000);
+        }, 1000);
+    }
+
+    function setLtrHeader() {
+        window.clearTimeout(headerTimerID);
+        headerTimerID = setTimeout(function f() {
+            headerSlider.trigger('next.owl.carousel');
+            headerTimerID = setTimeout(f, 1000);
+        }, 1000);
+    }
+
+
+    $('.header__slides').on('click', (e) => {
+        let target = $(e.target);
+
+        if (target.hasClass('arrow_prev--header')) {
+            console.log(1);
+            setRtlHeader();
+            certSliderDirection = 'rtl';
+            return;
+        }
+
+        if (target.hasClass('arrow_next--header')) {
+            console.log(12);
+            setLtrHeader();
+            certSliderDirection = 'ltr';
+            return
+        }
+
+        if (target.prop('tagName') == 'IMG') {
+            clearTimeout(timer);
+        }
+    });
+
+
+    setTimeout(() => {
+        $('.header__slide_sec').css('display', 'flex');
+        headerSlider.owlCarousel(headerSliderSettings);
+        headerTimerID = setTimeout(function startMoveLtr() {
+            headerSlider.trigger('next.owl.carousel');
+            headerTimerID = setTimeout(startMoveLtr, 1000);
+        }, 1000);
+    }, 500);
 
     const questionsList = $('.questions__list');
     let activeQuestion = null;
@@ -139,14 +195,11 @@
     sertSlider.owlCarousel({
         loop: true,
         margin: 10,
-        // autoplay: true,
-        // autoplayTimeout: 1000,
-        //autoplayHoverPause: true,
         dots: true,
         dotsClass: 'cert__dots',
         dotClass: 'cert__dot',
-        navContainerClass: 'cert__arrows',
-        navClass: ['cert__arrow cert__arrow_prev', 'cert__arrow cert__arrow_next'],
+        navContainerClass: 'arrows',
+        navClass: ['arrow arrow_prev', 'arrow arrow_next'],
         responsive: {
             0: {
                 items: 1,
@@ -192,13 +245,13 @@
     $('.cert__list').on('click', (e) => {
         let target = $(e.target);
 
-        if (target.hasClass('cert__arrow_prev')) {
+        if (target.hasClass('arrow_prev')) {
             setRtl();
             certSliderDirection = 'rtl';
             return;
         }
 
-        if (target.hasClass('cert__arrow_next')) {
+        if (target.hasClass('arrow_next')) {
             setLtr();
             certSliderDirection = 'ltr';
             return
@@ -242,4 +295,4 @@
 
 }());
 
-//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi5qcyIsInNvdXJjZXMiOltdLCJzb3VyY2VzQ29udGVudCI6W10sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7In0=
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi5qcyIsInNvdXJjZXMiOltdLCJzb3VyY2VzQ29udGVudCI6W10sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OzsifQ==

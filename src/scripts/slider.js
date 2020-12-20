@@ -1,11 +1,11 @@
-let headerSlider = new Glide('.glide', {
-    type: 'carousel',
-    autoplay: 3000,
-    //direction: 'rtl',
-    animationTimingFunc: 'linear',
-    perView: 1,
-    // startAt: 1
-});
+// slider.headerSlider = new Glide('.glide', {
+//     type: 'carousel',
+//     autoplay: 3000,
+//     //direction: 'rtl',
+//     animationTimingFunc: 'linear',
+//     perView: 1,
+//     // startAt: 1
+// });
 
 let slider = {}
 
