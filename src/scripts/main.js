@@ -1,6 +1,6 @@
 import burgerHandler from './burger';
 import phoneNumsHandler from './expandTelNum';
-import headerSlider from './slider';
+import slider from './slider';
 
 const btnBurger = $('.burger');
 const btnTopElem = $('.burger__elem_top');
@@ -28,10 +28,10 @@ expandPhoneBtn.on('click', function (e) {
     phoneNumsHandler.showAddNumbers(telContainer, phoneNumsHandler.numbers);
 });
 
-setTimeout(() => {
-    $('.header__slide_sec').css('display', 'flex');
-    headerSlider.mount();
-}, 500);
+// setTimeout(() => {
+//     $('.header__slide_sec').css('display', 'flex');
+//     headerSlider.mount();
+// }, 500);
 
 const questionsList = $('.questions__list');
 let activeQuestion = null;
@@ -62,3 +62,70 @@ questionsList.on('click', function (e) {
 
     }, 300);
 })
+
+let sertSlider = $('.sert .owl-carousel');
+sertSlider.owlCarousel({
+    loop: true,
+    margin: 10,
+    // autoplay: true,
+    // autoplayTimeout: 1000,
+    //autoplayHoverPause: true,
+    dots: true,
+    dotsClass: 'sert__dots',
+    dotClass: 'sert__dot',
+    navContainerClass: 'sert__arrows',
+    navClass: ['sert__arrow_prev', 'sert__arrow_next'],
+    responsive: {
+        0: {
+            items: 1,
+            nav: false,
+        },
+        768: {
+            items: 2
+        },
+        1024: {
+            items: 3,
+            nav: true,
+        },
+        1200: {
+            items: 4,
+            nav: true,
+        }
+    },
+});
+let timer;
+
+timer = setTimeout(function startMoveLtr() {
+    sertSlider.trigger('next.owl.carousel');
+    timer = setTimeout(startMoveLtr, 1000);
+}, 1000);
+
+function setRtl() {
+    window.clearTimeout(timer);
+    console.log(timer);
+    timer = setTimeout(function f() {
+        sertSlider.trigger('prev.owl.carousel');
+        timer = setTimeout(f, 1000);
+    }, 1000);
+}
+
+function setLtr() {
+    window.clearTimeout(timer);
+    console.log(timer)
+    timer = setTimeout(function f() {
+        sertSlider.trigger('next.owl.carousel');
+        timer = setTimeout(f, 1000);
+    }, 1000);
+}
+
+$('.sert__arrow_next').on('click', (e) => {
+    console.log(e.target);
+    setLtr();
+});
+$('.sert__arrow_prev').on('click', function (e) {
+    console.log(e.target)
+    setRtl();
+    // $(this).off()
+});
+
+

@@ -95,7 +95,7 @@ gulp.task("getAllJS", () => {
             })
         )
         .pipe(gulpIf(isDevelopment, sourcemaps.write()))
-        .pipe(minify())
+        //.pipe(minify())
         .pipe(gulp.dest("./public/scripts"))
 })
 

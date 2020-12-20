@@ -4,9 +4,10 @@
     padding-top   : 50px;
     padding-bottom: 50px;
 
-    background-image : url('../img/questions-bg.jpg');
-    background-repeat: no-repeat;
-    background-size  : cover;
+    background-image   : url('../img/questions-bg.jpg');
+    background-repeat  : no-repeat;
+    background-size    : cover;
+    background-position: left top;
 
     &__title {
         margin-bottom: 20px;
@@ -31,6 +32,10 @@
 
     &__item:not(:last-child) {
         margin-bottom: 10px;
+    }
+
+    &__item:hover {
+        cursor: pointer;
     }
 
     &__wrap {
