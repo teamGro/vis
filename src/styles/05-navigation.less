@@ -1,0 +1,32 @@
+@import './01-variables.less';
+
+.navigation {
+    font-weight   : bold;
+    line-height   : 20px;
+    color         : @header-font-color;
+    text-transform: uppercase;
+
+    &__list {
+        display        : flex;
+        flex-direction : column;
+        justify-content: center;
+
+        text-align: center;
+    }
+
+    &__item:not(:last-child) {
+        margin-bottom: 20px;
+    }
+
+    &__link {
+        transition: color 0.3s linear;
+    }
+
+    &__link:focus,
+    &__link:hover,
+    &__link:active {
+        outline: none;
+        cursor : pointer;
+        color  : @hover-font-color;
+    }
+}
