@@ -63,7 +63,7 @@ questionsList.on('click', function (e) {
     }, 300);
 })
 
-let sertSlider = $('.sert .owl-carousel');
+let sertSlider = $('.cert .owl-carousel');
 sertSlider.owlCarousel({
     loop: true,
     margin: 10,
@@ -71,10 +71,10 @@ sertSlider.owlCarousel({
     // autoplayTimeout: 1000,
     //autoplayHoverPause: true,
     dots: true,
-    dotsClass: 'sert__dots',
-    dotClass: 'sert__dot',
-    navContainerClass: 'sert__arrows',
-    navClass: ['sert__arrow_prev', 'sert__arrow_next'],
+    dotsClass: 'cert__dots',
+    dotClass: 'cert__dot',
+    navContainerClass: 'cert__arrows',
+    navClass: ['cert__arrow_prev', 'cert__arrow_next'],
     responsive: {
         0: {
             items: 1,
@@ -118,14 +118,44 @@ function setLtr() {
     }, 1000);
 }
 
-$('.sert__arrow_next').on('click', (e) => {
+$('.cert__arrow_next').on('click', (e) => {
     console.log(e.target);
     setLtr();
 });
-$('.sert__arrow_prev').on('click', function (e) {
+$('.cert__arrow_prev').on('click', function (e) {
     console.log(e.target)
     setRtl();
     // $(this).off()
+});
+
+$('.cert__list').on('click', (e) => {
+    let target = $(e.target);
+    console.log(target)
+    if (target.closest('.cert__list')) {
+        clearTimeout(timer);
+    }
+})
+
+$('[data-fancybox="gallery"]').fancybox({
+    loop: true,
+    arrows: true,
+    infobar: true,
+    buttons: [
+        "close"
+    ],
+    btnTpl: {
+
+        close:
+            `<button data-fancybox-close class="fancybox-button fancybox-button--close cert__close" title="{{CLOSE}}"></button>`,
+
+        // Arrows
+        arrowLeft:
+            `<button data-fancybox-prev class="fancybox-button fancybox-button--arrow_left cert__gallery-arrow cert__gallery-arrow_prev" title="{{PREV}}"></button>`,
+
+        arrowRight:
+            `<button data-fancybox-next class="fancybox-button fancybox-button--arrow_right cert__gallery-arrow cert__gallery-arrow_next" title="{{NEXT}}"></button>`
+    }
+
 });
 
 

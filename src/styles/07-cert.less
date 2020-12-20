@@ -1,6 +1,6 @@
 @import './01-variables.less';
 
-.sert {
+.cert {
     position: relative;
 
     padding-top   : 50px;
@@ -59,10 +59,39 @@
     &__arrows {
         display: none;
     }
+
+    &__close {
+        margin-top  : 20px;
+        margin-right: 20px;
+        width       : 50px;
+        height      : 50px;
+
+        background-color : transparent;
+        background-image : url('../img/close-gallery.png');
+        background-repeat: no-repeat;
+    }
+
+    &__gallery-arrow {
+        width  : 50px;
+        height : 50px;
+        padding: 27px 8px 26px 6px !important;
+
+        background-color   : transparent;
+        background-repeat  : no-repeat;
+        background-position: center;
+    }
+
+    &__gallery-arrow_next {
+        background-image: url('../img/gallery-next.png');
+    }
+
+    &__gallery-arrow_prev {
+        background-image: url('../img/gallery-prev.png');
+    }
 }
 
 @media(min-width: 1200px) {
-    .sert {
+    .cert {
         padding-top   : 117px;
         padding-bottom: 92px;
 
@@ -163,6 +192,11 @@
             & span {
                 display: none;
             }
+        }
+
+        &__close {
+            margin-top  : 50px;
+            margin-right: 50px;
         }
     }
 }
