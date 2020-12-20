@@ -146,7 +146,7 @@
         dotsClass: 'cert__dots',
         dotClass: 'cert__dot',
         navContainerClass: 'cert__arrows',
-        navClass: ['cert__arrow_prev', 'cert__arrow_next'],
+        navClass: ['cert__arrow cert__arrow_prev', 'cert__arrow cert__arrow_next'],
         responsive: {
             0: {
                 items: 1,
@@ -174,7 +174,6 @@
 
     function setRtl() {
         window.clearTimeout(timer);
-        console.log(timer);
         timer = setTimeout(function f() {
             sertSlider.trigger('prev.owl.carousel');
             timer = setTimeout(f, 1000);
@@ -183,34 +182,25 @@
 
     function setLtr() {
         window.clearTimeout(timer);
-        console.log(timer);
         timer = setTimeout(function f() {
             sertSlider.trigger('next.owl.carousel');
             timer = setTimeout(f, 1000);
         }, 1000);
     }
 
-    // $('.cert__arrow_next').on('click', (e) => {
-    //     console.log(e.target);
-    //     setLtr();
-    // });
-    // $('.cert__arrow_prev').on('click', function (e) {
-    //     console.log(e.target)
-    //     setRtl();
-    //     // $(this).off()
-    // });
-
+    let certSliderDirection = 'ltr';
     $('.cert__list').on('click', (e) => {
         let target = $(e.target);
-        console.log(target);
 
         if (target.hasClass('cert__arrow_prev')) {
             setRtl();
+            certSliderDirection = 'rtl';
             return;
         }
 
         if (target.hasClass('cert__arrow_next')) {
             setLtr();
+            certSliderDirection = 'ltr';
             return
         }
 
@@ -237,10 +227,19 @@
 
             arrowRight:
                 `<button data-fancybox-next class="fancybox-button fancybox-button--arrow_right cert__gallery-arrow cert__gallery-arrow_next" title="{{NEXT}}"></button>`
+        },
+        afterClose: function () {
+            console.log(1);
+            if (certSliderDirection == 'ltr') {
+                setLtr();
+                return;
+            }
+
+            setRtl();
         }
 
     });
 
 }());
 
-//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi5qcyIsInNvdXJjZXMiOltdLCJzb3VyY2VzQ29udGVudCI6W10sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OyJ9
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi5qcyIsInNvdXJjZXMiOltdLCJzb3VyY2VzQ29udGVudCI6W10sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7In0=
