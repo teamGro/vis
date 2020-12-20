@@ -118,20 +118,31 @@ function setLtr() {
     }, 1000);
 }
 
-$('.cert__arrow_next').on('click', (e) => {
-    console.log(e.target);
-    setLtr();
-});
-$('.cert__arrow_prev').on('click', function (e) {
-    console.log(e.target)
-    setRtl();
-    // $(this).off()
-});
+// $('.cert__arrow_next').on('click', (e) => {
+//     console.log(e.target);
+//     setLtr();
+// });
+// $('.cert__arrow_prev').on('click', function (e) {
+//     console.log(e.target)
+//     setRtl();
+//     // $(this).off()
+// });
 
 $('.cert__list').on('click', (e) => {
     let target = $(e.target);
     console.log(target)
-    if (target.closest('.cert__list')) {
+
+    if (target.hasClass('cert__arrow_prev')) {
+        setRtl();
+        return;
+    }
+
+    if (target.hasClass('cert__arrow_next')) {
+        setLtr();
+        return
+    }
+
+    if (target.prop('tagName') == 'IMG') {
         clearTimeout(timer);
     }
 })
