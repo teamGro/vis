@@ -225,7 +225,18 @@ $('[data-fancybox="gallery"]').fancybox({
 
         setRtl();
     }
-
 });
+
+const agreeLabel = $('.delivery__agree');
+agreeLabel.on('click', function () {
+    if ($(this).hasClass('delivery__agree_active')) {
+        $(this).parent().find('input').attr('checked', false);
+        $(this).removeClass('delivery__agree_active');
+        return;
+    }
+    $(this).parent().find('input').attr('checked', true);
+    $(this).addClass('delivery__agree_active');
+
+})
 
 
