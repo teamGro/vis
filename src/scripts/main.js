@@ -239,4 +239,16 @@ agreeLabel.on('click', function () {
 
 })
 
+let aboutSlider = $('.about .owl-carousel');
+aboutSlider.owlCarousel({
+    loop: true,
+    margin: 10,
+    dots: false,
+    //navContainerClass: 'arrows',
+    //navClass: ['arrow arrow_prev', 'arrow arrow_next'],
+    items: 1,
+});
 
+console.log($('.about .owl-stage'));
+console.log($('.about .owl-stage').children());
+console.log($('.owl-item active').next());
