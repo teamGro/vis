@@ -5,9 +5,9 @@
 
   &__subtitle {
     margin-bottom: 30px;
-    font-weight: bold;
-    font-size: 2.5rem;
-    line-height: 40px;
+    font-weight  : bold;
+    font-size    : 2.5rem;
+    line-height  : 40px;
 
     & span {
       color: #df622c;
@@ -16,9 +16,9 @@
 
   &__text {
     font-family: Gotham Pro;
-    font-style: normal;
+    font-style : normal;
     font-weight: normal;
-    font-size: 20px;
+    font-size  : 20px;
     line-height: 120%;
 
     &_orange {
@@ -32,50 +32,51 @@
 
   &__text-box {
     margin-bottom: 30px;
+
     p:not(:last-child) {
       margin-bottom: 30px;
     }
   }
 
   &__info {
-    margin-bottom: 30px;
+    margin-bottom : 30px;
     padding-bottom: 30px;
-    border-bottom: 3px solid #f2f2f2;
+    border-bottom : 3px solid #f2f2f2;
   }
 
   &__list {
-    margin-top: 30px;
-    margin-bottom: 30px;
-    display: flex;
+    margin-top    : 30px;
+    margin-bottom : 30px;
+    display       : flex;
     flex-direction: column;
   }
 
   &__item {
-    position: relative;
+    position    : relative;
     padding-left: 38px;
 
     font-family: Gotham Pro;
-    font-style: normal;
+    font-style : normal;
     font-weight: normal;
-    font-size: 18px;
+    font-size  : 18px;
     line-height: 120%;
-    color: #000000;
+    color      : #000000;
 
     &:not(:last-child) {
       margin-bottom: 15px;
     }
 
     &::before {
-      content: '';
+      content : '';
       position: absolute;
-      left: 0;
+      left    : 0;
 
       display: block;
-      width: 15px;
-      height: 100%;
+      width  : 15px;
+      height : 100%;
 
-      background-image: url('../img/about-elem.png');
-      background-repeat: no-repeat;
+      background-image   : url('../img/about-elem.png');
+      background-repeat  : no-repeat;
       background-position: center;
     }
   }
@@ -86,30 +87,30 @@
 
   &__gallery-list {
     position: relative;
-    width: 100%;
-    height: auto;
-    z-index: 5;
+    width   : 100%;
+    height  : auto;
+    z-index : 5;
   }
 
   &__gallery-item {
-    width: 70%;
+    width: 86%;
   }
 
   &__clone {
     position: absolute;
-    top: 10%;
-    left: 10%;
+    top     : 16%;
+    left    : 16%;
 
-    width: 70%;
+    width  : 86%;
     z-index: 1;
   }
 
   &__gallery-item-clone {
     position: absolute;
-    left: 0;
-    top: 0;
+    left    : 0;
+    top     : 0;
 
-    filter: sepia(100%);
+    filter : sepia(100%);
     z-index: 1;
   }
 }
@@ -118,7 +119,7 @@
   .about {
     &__list {
       flex-direction: row;
-      flex-wrap: wrap;
+      flex-wrap     : wrap;
     }
 
     &__item {
@@ -146,7 +147,7 @@
 
     &__subtitle {
       margin-bottom: 44px;
-      font-size: 40px;
+      font-size    : 40px;
     }
 
     &__text {

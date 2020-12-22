@@ -255,9 +255,11 @@ aboutSlider.owlCarousel({
   loop: true,
   margin: 100,
   dots: false,
-  //navContainerClass: 'arrows',
-  //navClass: ['arrow arrow_prev', 'arrow arrow_next'],
+  navContainerClass: 'arrows_about',
+  navClass: ['arrow arrow_prev', 'arrow arrow_next'],
   items: 1,
+  animateOut: 'slideOutLeft',
+  animateIn: 'slideInUp',
 });
 
 let cloneImg = $('.about__img-clone');
