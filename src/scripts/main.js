@@ -9,246 +9,268 @@ const btnBottomElem = $('.burger__elem_bottom');
 const mobileMenu = $('.header__menu');
 
 btnBurger.on('click', function () {
-    burgerHandler($(this), btnTopElem, btnMiddleElem, btnBottomElem, mobileMenu);
+  burgerHandler($(this), btnTopElem, btnMiddleElem, btnBottomElem, mobileMenu);
 });
 
-const telContainer = $(".header__contacts-expand");
+const telContainer = $('.header__contacts-expand');
 const expandPhoneBtn = $('.header__tel-btn');
 expandPhoneBtn.on('click', function (e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    if ($(this).hasClass('header__tel-btn_active')) {
-        telContainer.slideUp();
-        telContainer.empty();
-        $(this).removeClass('header__tel-btn_active');
-        return;
-    }
+  if ($(this).hasClass('header__tel-btn_active')) {
+    telContainer.slideUp();
+    telContainer.empty();
+    $(this).removeClass('header__tel-btn_active');
+    return;
+  }
 
-    $(this).addClass('header__tel-btn_active');
-    phoneNumsHandler.showAddNumbers(telContainer, phoneNumsHandler.numbers);
+  $(this).addClass('header__tel-btn_active');
+  phoneNumsHandler.showAddNumbers(telContainer, phoneNumsHandler.numbers);
 });
 
 let headerSliderSettings = {
-    loop: true,
-    items: 1,
-    dots: true,
-    dotsClass: 'header__bullets',
-    dotClass: 'header__bullet',
-    navContainerClass: 'arrows arrows_header',
-    navClass: ['arrow arrow_prev arrow_prev--header', 'arrow arrow_next arrow_next--header'],
-    responsive: {
-        0: {
-            nav: false,
-        },
-        1200: {
-            nav: true,
-        }
+  loop: true,
+  items: 1,
+  dots: true,
+  dotsClass: 'header__bullets',
+  dotClass: 'header__bullet',
+  navContainerClass: 'arrows arrows_header',
+  navClass: ['arrow arrow_prev arrow_prev--header', 'arrow arrow_next arrow_next--header'],
+  responsive: {
+    0: {
+      nav: false,
     },
+    1200: {
+      nav: true,
+    },
+  },
 };
 let headerTimerID;
 let headerSlider = $('.header .owl-carousel');
 function setRtlHeader() {
-    window.clearTimeout(headerTimerID);
-    headerTimerID = setTimeout(function f() {
-        headerSlider.trigger('prev.owl.carousel');
-        headerTimerID = setTimeout(f, 1000);
-    }, 1000);
+  window.clearTimeout(headerTimerID);
+  headerTimerID = setTimeout(function f() {
+    headerSlider.trigger('prev.owl.carousel');
+    headerTimerID = setTimeout(f, 1000);
+  }, 1000);
 }
 
 function setLtrHeader() {
-    window.clearTimeout(headerTimerID);
-    headerTimerID = setTimeout(function f() {
-        headerSlider.trigger('next.owl.carousel');
-        headerTimerID = setTimeout(f, 1000);
-    }, 1000);
+  window.clearTimeout(headerTimerID);
+  headerTimerID = setTimeout(function f() {
+    headerSlider.trigger('next.owl.carousel');
+    headerTimerID = setTimeout(f, 1000);
+  }, 1000);
 }
 
-
 $('.header__slides').on('click', (e) => {
-    let target = $(e.target);
+  let target = $(e.target);
 
-    if (target.hasClass('arrow_prev--header')) {
-        console.log(1)
-        setRtlHeader();
-        certSliderDirection = 'rtl'
-        return;
-    }
+  if (target.hasClass('arrow_prev--header')) {
+    console.log(1);
+    setRtlHeader();
+    certSliderDirection = 'rtl';
+    return;
+  }
 
-    if (target.hasClass('arrow_next--header')) {
-        console.log(12)
-        setLtrHeader();
-        certSliderDirection = 'ltr';
-        return
-    }
+  if (target.hasClass('arrow_next--header')) {
+    console.log(12);
+    setLtrHeader();
+    certSliderDirection = 'ltr';
+    return;
+  }
 
-    if (target.prop('tagName') == 'IMG') {
-        clearTimeout(timer);
-    }
+  if (target.prop('tagName') == 'IMG') {
+    clearTimeout(timer);
+  }
 });
 
-
 setTimeout(() => {
-    $('.header__slide_sec').css('display', 'flex');
-    headerSlider.owlCarousel(headerSliderSettings);
-    headerTimerID = setTimeout(function startMoveLtr() {
-        headerSlider.trigger('next.owl.carousel');
-        headerTimerID = setTimeout(startMoveLtr, 1000);
-    }, 1000);
+  $('.header__slide_sec').css('display', 'flex');
+  headerSlider.owlCarousel(headerSliderSettings);
+  headerTimerID = setTimeout(function startMoveLtr() {
+    headerSlider.trigger('next.owl.carousel');
+    headerTimerID = setTimeout(startMoveLtr, 1000);
+  }, 1000);
 }, 500);
 
 const questionsList = $('.questions__list');
 let activeQuestion = null;
 questionsList.on('click', function (e) {
-    let $target = $(e.target);
-    if (!$target.closest('.questions__wrap')) return;
+  let $target = $(e.target);
+  if (!$target.closest('.questions__wrap')) return;
 
-    $target = $target.closest('.questions__wrap');
-    let $parent = $target.parent();
+  $target = $target.closest('.questions__wrap');
+  let $parent = $target.parent();
 
+  if (activeQuestion && activeQuestion.attr('data-num') == $parent.attr('data-num')) {
+    activeQuestion.find('.questions__describe').slideUp('slow');
+    $target.removeClass('questions__wrap_open');
+    activeQuestion = null;
+    return;
+  }
 
-    if (activeQuestion && activeQuestion.attr('data-num') == $parent.attr('data-num')) {
-        activeQuestion.find('.questions__describe').slideUp('slow');
-        $target.removeClass('questions__wrap_open');
-        activeQuestion = null;
-        return;
-    }
+  if (activeQuestion) {
+    activeQuestion.find('.questions__describe').slideUp('slow');
+    activeQuestion.find('.questions__wrap_open').removeClass('questions__wrap_open');
+  }
 
-    if (activeQuestion) {
-        activeQuestion.find('.questions__describe').slideUp('slow');
-        activeQuestion.find('.questions__wrap_open').removeClass('questions__wrap_open');
-    }
-
-    setTimeout(() => {
-        $target.addClass('questions__wrap_open');
-        $parent.find('.questions__describe').slideDown('slow');
-        activeQuestion = $parent;
-
-    }, 300);
-})
+  setTimeout(() => {
+    $target.addClass('questions__wrap_open');
+    $parent.find('.questions__describe').slideDown('slow');
+    activeQuestion = $parent;
+  }, 300);
+});
 
 let sertSlider = $('.cert .owl-carousel');
 sertSlider.owlCarousel({
-    loop: true,
-    margin: 10,
-    dots: true,
-    dotsClass: 'cert__dots',
-    dotClass: 'cert__dot',
-    navContainerClass: 'arrows',
-    navClass: ['arrow arrow_prev', 'arrow arrow_next'],
-    responsive: {
-        0: {
-            items: 1,
-            nav: false,
-        },
-        768: {
-            items: 2
-        },
-        1024: {
-            items: 3,
-            nav: true,
-        },
-        1200: {
-            items: 4,
-            nav: true,
-        }
+  loop: true,
+  margin: 10,
+  dots: true,
+  dotsClass: 'cert__dots',
+  dotClass: 'cert__dot',
+  navContainerClass: 'arrows',
+  navClass: ['arrow arrow_prev', 'arrow arrow_next'],
+  responsive: {
+    0: {
+      items: 1,
+      nav: false,
     },
+    768: {
+      items: 2,
+    },
+    1024: {
+      items: 3,
+      nav: true,
+    },
+    1200: {
+      items: 4,
+      nav: true,
+    },
+  },
 });
 let timer;
 
 timer = setTimeout(function startMoveLtr() {
-    sertSlider.trigger('next.owl.carousel');
-    timer = setTimeout(startMoveLtr, 1000);
+  sertSlider.trigger('next.owl.carousel');
+  timer = setTimeout(startMoveLtr, 1000);
 }, 1000);
 
 function setRtl() {
-    window.clearTimeout(timer);
-    timer = setTimeout(function f() {
-        sertSlider.trigger('prev.owl.carousel');
-        timer = setTimeout(f, 1000);
-    }, 1000);
+  window.clearTimeout(timer);
+  timer = setTimeout(function f() {
+    sertSlider.trigger('prev.owl.carousel');
+    timer = setTimeout(f, 1000);
+  }, 1000);
 }
 
 function setLtr() {
-    window.clearTimeout(timer);
-    timer = setTimeout(function f() {
-        sertSlider.trigger('next.owl.carousel');
-        timer = setTimeout(f, 1000);
-    }, 1000);
+  window.clearTimeout(timer);
+  timer = setTimeout(function f() {
+    sertSlider.trigger('next.owl.carousel');
+    timer = setTimeout(f, 1000);
+  }, 1000);
 }
 
 let certSliderDirection = 'ltr';
 $('.cert__list').on('click', (e) => {
-    let target = $(e.target);
+  let target = $(e.target);
 
-    if (target.hasClass('arrow_prev')) {
-        setRtl();
-        certSliderDirection = 'rtl'
-        return;
-    }
+  if (target.hasClass('arrow_prev')) {
+    setRtl();
+    certSliderDirection = 'rtl';
+    return;
+  }
 
-    if (target.hasClass('arrow_next')) {
-        setLtr();
-        certSliderDirection = 'ltr';
-        return
-    }
+  if (target.hasClass('arrow_next')) {
+    setLtr();
+    certSliderDirection = 'ltr';
+    return;
+  }
 
-    if (target.prop('tagName') == 'IMG') {
-        clearTimeout(timer);
-    }
-})
+  if (target.prop('tagName') == 'IMG') {
+    clearTimeout(timer);
+  }
+});
 
 $('[data-fancybox="gallery"]').fancybox({
-    loop: true,
-    arrows: true,
-    infobar: true,
-    buttons: [
-        "close"
-    ],
-    btnTpl: {
+  loop: true,
+  arrows: true,
+  infobar: true,
+  buttons: ['close'],
+  btnTpl: {
+    close: `<button data-fancybox-close class="fancybox-button fancybox-button--close cert__close" title="{{CLOSE}}"></button>`,
 
-        close:
-            `<button data-fancybox-close class="fancybox-button fancybox-button--close cert__close" title="{{CLOSE}}"></button>`,
+    // Arrows
+    arrowLeft: `<button data-fancybox-prev class="fancybox-button fancybox-button--arrow_left cert__gallery-arrow cert__gallery-arrow_prev" title="{{PREV}}"></button>`,
 
-        // Arrows
-        arrowLeft:
-            `<button data-fancybox-prev class="fancybox-button fancybox-button--arrow_left cert__gallery-arrow cert__gallery-arrow_prev" title="{{PREV}}"></button>`,
-
-        arrowRight:
-            `<button data-fancybox-next class="fancybox-button fancybox-button--arrow_right cert__gallery-arrow cert__gallery-arrow_next" title="{{NEXT}}"></button>`
-    },
-    afterClose: function () {
-        console.log(1);
-        if (certSliderDirection == 'ltr') {
-            setLtr();
-            return;
-        }
-
-        setRtl();
+    arrowRight: `<button data-fancybox-next class="fancybox-button fancybox-button--arrow_right cert__gallery-arrow cert__gallery-arrow_next" title="{{NEXT}}"></button>`,
+  },
+  afterClose: function () {
+    console.log(1);
+    if (certSliderDirection == 'ltr') {
+      setLtr();
+      return;
     }
+
+    setRtl();
+  },
 });
 
 const agreeLabel = $('.delivery__agree');
 agreeLabel.on('click', function () {
-    if ($(this).hasClass('delivery__agree_active')) {
-        $(this).parent().find('input').attr('checked', false);
-        $(this).removeClass('delivery__agree_active');
-        return;
-    }
-    $(this).parent().find('input').attr('checked', true);
-    $(this).addClass('delivery__agree_active');
+  if ($(this).hasClass('delivery__agree_active')) {
+    $(this).parent().find('input').attr('checked', false);
+    $(this).removeClass('delivery__agree_active');
+    return;
+  }
+  $(this).parent().find('input').attr('checked', true);
+  $(this).addClass('delivery__agree_active');
+});
 
-})
+//about
+let cloneContainer = $('.about__clone');
+let aboutImgContainer = $('.about__gallery-list');
+let imgs = [];
+$('.about__img').each(function (i) {
+  imgs.push($(this).attr('src'));
+});
+function duplicateAboutSlider() {
+  function createMarkup(data) {
+    return `<div class="about__gallery-item-clone">
+        <img src="${data}" alt="" class="about__img-clone" />
+      </div>`;
+  }
+  for (let i = 0; i < imgs.length; i++) {
+    cloneContainer.append(createMarkup(imgs[i]));
+  }
+}
+
+//duplicateAboutSlider();
 
 let aboutSlider = $('.about .owl-carousel');
 aboutSlider.owlCarousel({
-    loop: true,
-    margin: 10,
-    dots: false,
-    //navContainerClass: 'arrows',
-    //navClass: ['arrow arrow_prev', 'arrow arrow_next'],
-    items: 1,
+  loop: true,
+  margin: 100,
+  dots: false,
+  //navContainerClass: 'arrows',
+  //navClass: ['arrow arrow_prev', 'arrow arrow_next'],
+  items: 1,
 });
 
-console.log($('.about .owl-stage'));
-console.log($('.about .owl-stage').children());
-console.log($('.owl-item active').next());
+let cloneImg = $('.about__img-clone');
+console.log(cloneImg.attr('src'));
+aboutSlider.on('drag.owl.carousel', (e) => {
+  console.log($(e.target));
+  let activeImg = $(e.target).find('img').attr('src');
+  console.log(activeImg);
+  cloneImg.attr('src', activeImg);
+
+  //   let cloneCont = $('about__gallery-item-clone');
+  //   cloneCont.empty();
+  //   console.log(cloneCont);
+  //   let img = `<img src="${activeImg}" alt="" class="about__img-clone" />`;
+  //   cloneCont.append(img);
+  //   console.log(cloneCont);
+  console.log(cloneImg.attr('src'));
+});
