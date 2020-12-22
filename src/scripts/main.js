@@ -229,24 +229,26 @@ agreeLabel.on('click', function () {
 });
 
 //about
-let cloneContainer = $('.about__clone');
+let cloneContainer = $('.about__gallery-item-clone');
 let aboutImgContainer = $('.about__gallery-list');
 let imgs = [];
 $('.about__img').each(function (i) {
   imgs.push($(this).attr('src'));
 });
-function duplicateAboutSlider() {
-  function createMarkup(data) {
-    return `<div class="about__gallery-item-clone">
+function duplicateAboutSlider(data) {
+  function createMarkup() {
+    //<div class="about__gallery-item-clone"></div>
+    return `
         <img src="${data}" alt="" class="about__img-clone" />
-      </div>`;
+      `;
   }
-  for (let i = 0; i < imgs.length; i++) {
-    cloneContainer.append(createMarkup(imgs[i]));
-  }
+
+  cloneContainer.append(createMarkup(data));
 }
 
-//duplicateAboutSlider();
+let secondImgInContainer = $('.about__img')[1];
+let secondImgSrc = secondImgInContainer.getAttribute('src');
+duplicateAboutSlider(secondImgSrc);
 
 let aboutSlider = $('.about .owl-carousel');
 aboutSlider.owlCarousel({
@@ -259,18 +261,10 @@ aboutSlider.owlCarousel({
 });
 
 let cloneImg = $('.about__img-clone');
-console.log(cloneImg.attr('src'));
 aboutSlider.on('drag.owl.carousel', (e) => {
-  console.log($(e.target));
-  let activeImg = $(e.target).find('img').attr('src');
-  console.log(activeImg);
-  cloneImg.attr('src', activeImg);
+  let activeImg = $(e.target).find('.owl-item.active img').attr('src');
 
-  //   let cloneCont = $('about__gallery-item-clone');
-  //   cloneCont.empty();
-  //   console.log(cloneCont);
-  //   let img = `<img src="${activeImg}" alt="" class="about__img-clone" />`;
-  //   cloneCont.append(img);
-  //   console.log(cloneCont);
-  console.log(cloneImg.attr('src'));
+  setTimeout(() => {
+    cloneImg.attr('src', activeImg);
+  }, 300);
 });
