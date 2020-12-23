@@ -22,10 +22,11 @@
     }
 
     &_about {
-      width : 200px;
-      top   : auto;
-      left  : 213px;
-      bottom: 35px;
+      width  : 200px;
+      top    : auto;
+      left   : 213px;
+      bottom : -11%;
+      display: none;
     }
   }
 }
@@ -116,5 +117,11 @@
 
   &--header::after {
     background-image: url(../img/un-next.png);
+  }
+}
+
+@media(min-width: 1300px) {
+  .arrows_about {
+    display: flex;
   }
 }

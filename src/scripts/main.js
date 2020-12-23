@@ -200,10 +200,7 @@ $('[data-fancybox="gallery"]').fancybox({
   buttons: ['close'],
   btnTpl: {
     close: `<button data-fancybox-close class="fancybox-button fancybox-button--close cert__close" title="{{CLOSE}}"></button>`,
-
-    // Arrows
     arrowLeft: `<button data-fancybox-prev class="fancybox-button fancybox-button--arrow_left cert__gallery-arrow cert__gallery-arrow_prev" title="{{PREV}}"></button>`,
-
     arrowRight: `<button data-fancybox-next class="fancybox-button fancybox-button--arrow_right cert__gallery-arrow cert__gallery-arrow_next" title="{{NEXT}}"></button>`,
   },
   afterClose: function () {
@@ -217,6 +214,8 @@ $('[data-fancybox="gallery"]').fancybox({
   },
 });
 
+
+//delivery
 const agreeLabel = $('.delivery__agree');
 agreeLabel.on('click', function () {
   if ($(this).hasClass('delivery__agree_active')) {

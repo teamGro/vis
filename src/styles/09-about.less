@@ -83,7 +83,10 @@
   }
 
   &__gallery-wrapper {
-    position: relative;
+    position    : relative;
+    width       : 80%;
+    margin-left : auto;
+    margin-right: auto;
   }
 
   &__gallery-list {
@@ -94,25 +97,21 @@
   }
 
   &__gallery-item {
-    width: 86%;
-  }
-
-  &__clone {
-    position: absolute;
+    width        : 100%;
+    // box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   }
 
   &__gallery-item-clone {
     position: absolute;
-    left    : 0;
-    top     : 0;
 
-    top : 14%;
-    left: 14%;
+    top : 4%;
+    left: 4%;
 
-    width   : 86%;
-    z-index : 1;
-    //filter: sepia(100%);
-    z-index : 1;
+    width        : 100%;
+    z-index      : 1;
+    // transform : translateX(5%);
+    // margin-top: -88%;
+    z-index      : 1;
 
     &::after {
       content: '';
@@ -145,6 +144,7 @@
     &__list {
       flex-direction: row;
       flex-wrap     : wrap;
+      align-items   : center;
     }
 
     &__item {
@@ -162,7 +162,7 @@
   }
 }
 
-@media (min-width: @desktop-width) {
+@media (min-width: 1300px) {
   .about {
     padding-top: 140px;
 
@@ -191,9 +191,10 @@
     }
 
     &__gallery-wrapper {
-      display  : flex;
-      flex-grow: 1;
-      max-width: 752px;
+      display    : flex;
+      flex-grow  : 1;
+      max-width  : 752px;
+      align-items: flex-end;
     }
 
     &__gallery-list {
@@ -202,19 +203,20 @@
     }
 
     &__gallery-item {
-      padding-bottom: 18%;
-      width         : 100%;
+      // padding-bottom: 18%;
+      width: 100%;
     }
 
     &__gallery-item-clone {
       top   : auto;
-      bottom: 0;
+      left  : 6%;
+      bottom: -6%;
       width : 100%;
     }
 
     &__slider-num {
       position: absolute;
-      bottom  : 65px;
+      bottom  : -4%;
       left    : 233px;
 
       display: block;
@@ -239,19 +241,14 @@
   animation-fill-mode        : both;
 }
 
-/* .owl-animated-out - only for current item */
-/* This is very important class. Use z-index if you want move Out item above In item */
 .owl-animated-out {
   z-index: 1
 }
 
-/* .owl-animated-in - only for upcoming item
-/* This is very important class. Use z-index if you want move In item above Out item */
 .owl-animated-in {
   z-index: 0
 }
 
-/* .fadeOut is style taken from Animation.css and this is how it looks in owl.carousel.css:  */
 .fadeOut {
   -webkit-animation-name: fadeOut;
   animation-name        : fadeOut;
@@ -260,7 +257,7 @@
 @keyframes fadeIn {
   0% {
     opacity  : 0;
-    transform: translate(14%, 14%);
+    transform: translate(14%, 50%);
   }
 
   100% {
@@ -268,7 +265,6 @@
     transform: translate(0%, 0%);
   }
 }
-
 
 @keyframes fadeOut {
   0% {
