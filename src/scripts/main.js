@@ -271,7 +271,5 @@ aboutSlider.on('drag.owl.carousel', (e) => {
 
 let aboutItem = 1;
 aboutSlider.on('changed.owl.carousel', function (e) {
-  console.log(e.item.index, maxSlideNum);
-
   $('.about__slider-num').text(e.item.index - 1 + '/' + e.item.count);
 });
