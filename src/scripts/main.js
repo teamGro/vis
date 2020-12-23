@@ -254,7 +254,9 @@ aboutSlider.owlCarousel({
   navClass: ['arrow arrow_prev', 'arrow arrow_next'],
   items: 1,
   animateOut: 'slideOutLeft',
-  animateIn: 'slideInUp',
+  // animateIn: 'slideInUp',
+  //animateOut: 'fadeOut',
+  animateIn: 'fadeIn',
   onInitialized: function (e) {
     $('.about__slider-num').text('1 / ' + this.items().length);
     console.log();
