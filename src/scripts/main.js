@@ -51,16 +51,16 @@ function setRtlHeader() {
   window.clearTimeout(headerTimerID);
   headerTimerID = setTimeout(function f() {
     headerSlider.trigger('prev.owl.carousel');
-    headerTimerID = setTimeout(f, 1000);
-  }, 1000);
+    headerTimerID = setTimeout(f, 2000);
+  }, 2000);
 }
 
 function setLtrHeader() {
   window.clearTimeout(headerTimerID);
   headerTimerID = setTimeout(function f() {
     headerSlider.trigger('next.owl.carousel');
-    headerTimerID = setTimeout(f, 1000);
-  }, 1000);
+    headerTimerID = setTimeout(f, 2000);
+  }, 2000);
 }
 
 $('.header__slides').on('click', (e) => {
@@ -90,9 +90,9 @@ setTimeout(() => {
   headerSlider.owlCarousel(headerSliderSettings);
   headerTimerID = setTimeout(function startMoveLtr() {
     headerSlider.trigger('next.owl.carousel');
-    headerTimerID = setTimeout(startMoveLtr, 1000);
-  }, 1000);
-}, 500);
+    headerTimerID = setTimeout(startMoveLtr, 2000);
+  }, 2000);
+}, 1000);
 
 const questionsList = $('.questions__list');
 let activeQuestion = null;
@@ -235,38 +235,43 @@ let imgs = [];
 $('.about__img').each(function (i) {
   imgs.push($(this).attr('src'));
 });
-function duplicateAboutSlider(data) {
-  function createMarkup() {
-    //<div class="about__gallery-item-clone"></div>
-    return `
-        <img src="${data}" alt="" class="about__img-clone" />
-      `;
+function duplicateAboutSlider(img) {
+  function createMarkup(img) {
+    return `<img src="${img}" alt="" class="about__img-clone" />`;
   }
-
-  cloneContainer.append(createMarkup(data));
+  cloneContainer.append(createMarkup(img));
 }
-
-let secondImgInContainer = $('.about__img')[1];
-let secondImgSrc = secondImgInContainer.getAttribute('src');
-duplicateAboutSlider(secondImgSrc);
+let secImg = $('.about__img')[1];
+let secImgPath = secImg.getAttribute('src');
+duplicateAboutSlider(secImgPath);
 
 let aboutSlider = $('.about .owl-carousel');
 aboutSlider.owlCarousel({
   loop: true,
   margin: 100,
   dots: false,
-  navContainerClass: 'arrows_about',
+  navContainerClass: 'arrows arrows_about',
   navClass: ['arrow arrow_prev', 'arrow arrow_next'],
   items: 1,
   animateOut: 'slideOutLeft',
   animateIn: 'slideInUp',
+  onInitialized: function (e) {
+    $('.about__slider-num').text('1 / ' + this.items().length);
+    console.log();
+  },
 });
 
 let cloneImg = $('.about__img-clone');
 aboutSlider.on('drag.owl.carousel', (e) => {
-  let activeImg = $(e.target).find('.owl-item.active img').attr('src');
-
+  let activeImg = $(e.target).find('.owl-item.active').next().next().find('img').attr('src');
   setTimeout(() => {
     cloneImg.attr('src', activeImg);
-  }, 300);
+  }, 500);
+});
+
+let aboutItem = 1;
+aboutSlider.on('changed.owl.carousel', function (e) {
+  console.log(e.item.index, maxSlideNum);
+
+  $('.about__slider-num').text(e.item.index - 1 + '/' + e.item.count);
 });
