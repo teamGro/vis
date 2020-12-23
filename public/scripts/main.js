@@ -116,16 +116,16 @@
       window.clearTimeout(headerTimerID);
       headerTimerID = setTimeout(function f() {
         headerSlider.trigger('prev.owl.carousel');
-        headerTimerID = setTimeout(f, 1000);
-      }, 1000);
+        headerTimerID = setTimeout(f, 2000);
+      }, 2000);
     }
 
     function setLtrHeader() {
       window.clearTimeout(headerTimerID);
       headerTimerID = setTimeout(function f() {
         headerSlider.trigger('next.owl.carousel');
-        headerTimerID = setTimeout(f, 1000);
-      }, 1000);
+        headerTimerID = setTimeout(f, 2000);
+      }, 2000);
     }
 
     $('.header__slides').on('click', (e) => {
@@ -155,9 +155,9 @@
       headerSlider.owlCarousel(headerSliderSettings);
       headerTimerID = setTimeout(function startMoveLtr() {
         headerSlider.trigger('next.owl.carousel');
-        headerTimerID = setTimeout(startMoveLtr, 1000);
-      }, 1000);
-    }, 500);
+        headerTimerID = setTimeout(startMoveLtr, 2000);
+      }, 2000);
+    }, 1000);
 
     const questionsList = $('.questions__list');
     let activeQuestion = null;
@@ -294,42 +294,52 @@
     });
 
     //about
-    let cloneContainer = $('.about__clone');
+    let cloneContainer = $('.about__gallery-item-clone');
     let aboutImgContainer = $('.about__gallery-list');
     let imgs = [];
     $('.about__img').each(function (i) {
       imgs.push($(this).attr('src'));
     });
-
-    //duplicateAboutSlider();
+    function duplicateAboutSlider(img) {
+      function createMarkup(img) {
+        return `<img src="${img}" alt="" class="about__img-clone" />`;
+      }
+      cloneContainer.append(createMarkup(img));
+    }
+    let secImg = $('.about__img')[1];
+    let secImgPath = secImg.getAttribute('src');
+    duplicateAboutSlider(secImgPath);
 
     let aboutSlider = $('.about .owl-carousel');
     aboutSlider.owlCarousel({
       loop: true,
       margin: 100,
       dots: false,
-      //navContainerClass: 'arrows',
-      //navClass: ['arrow arrow_prev', 'arrow arrow_next'],
+      navContainerClass: 'arrows arrows_about',
+      navClass: ['arrow arrow_prev', 'arrow arrow_next'],
       items: 1,
+      animateOut: 'slideOutLeft',
+      animateIn: 'slideInUp',
+      onInitialized: function (e) {
+        $('.about__slider-num').text('1 / ' + this.items().length);
+        console.log();
+      },
     });
 
     let cloneImg = $('.about__img-clone');
     console.log(cloneImg.attr('src'));
     aboutSlider.on('drag.owl.carousel', (e) => {
-      console.log($(e.target));
-      let activeImg = $(e.target).find('img').attr('src');
-      console.log(activeImg);
-      cloneImg.attr('src', activeImg);
+      let activeImg = $(e.target).find('.owl-item.active').next().next().find('img').attr('src');
+      setTimeout(() => {
+        cloneImg.attr('src', activeImg);
+      }, 500);
+    });
+    aboutSlider.on('changed.owl.carousel', function (e) {
+      console.log(e.item.index, maxSlideNum);
 
-      //   let cloneCont = $('about__gallery-item-clone');
-      //   cloneCont.empty();
-      //   console.log(cloneCont);
-      //   let img = `<img src="${activeImg}" alt="" class="about__img-clone" />`;
-      //   cloneCont.append(img);
-      //   console.log(cloneCont);
-      console.log(cloneImg.attr('src'));
+      $('.about__slider-num').text(e.item.index - 1 + '/' + e.item.count);
     });
 
 }());
 
-//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi5qcyIsInNvdXJjZXMiOltdLCJzb3VyY2VzQ29udGVudCI6W10sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7In0=
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi5qcyIsInNvdXJjZXMiOltdLCJzb3VyY2VzQ29udGVudCI6W10sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OyJ9

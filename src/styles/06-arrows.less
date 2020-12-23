@@ -1,107 +1,120 @@
 @import './01-variables.less';
 
 .arrows {
-    display: none
+  display: none;
 }
 
-@media(min-width: @desktop-width) {
-    .arrows {
-        position : absolute;
-        top      : 50%;
-        transform: translate(-60px, -50%);
+@media (min-width: @desktop-width) {
+  .arrows {
+    position: absolute;
+    top: 50%;
+    transform: translate(-60px, -50%);
 
-        display        : flex;
-        justify-content: space-between;
-        width          : calc(100% + 120px);
-        padding-left   : 10px;
-        padding-right  : 10px;
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% + 120px);
+    padding-left: 10px;
+    padding-right: 10px;
 
-        &_header {
-            transform: translate(0, -50%);
-            width    : 100%;
-        }
+    &_header {
+      transform: translate(0, -50%);
+      width: 100%;
     }
+
+    &_about {
+      width: 200px;
+      top: auto;
+      left: 213px;
+      bottom: 35px;
+    }
+  }
 }
 
 .arrow {
-    position  : relative;
-    width     : 46px;
-    height    : 39px;
+  position: relative;
+  width: 48px;
+  height: 42px;
+  transition: background-image @link-effect;
+
+  &::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    background-repeat: no-repeat;
+    //background-size: cover;
     transition: background-image @link-effect;
+  }
 
-    &::before {
-        content: '';
-        display: block;
-        width  : 100%;
-        height : 100%;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
 
-        background-repeat: no-repeat;
-        background-size  : cover;
-        transition       : background-image @link-effect;
-    }
+    display: block;
+    width: 100%;
+    height: 100%;
+    transform: scale(0);
+    transition: transform @link-effect;
+    background-repeat: no-repeat;
+  }
 
-    &::after {
-        content : '';
-        position: absolute;
-        top     : 0;
-        left    : 0;
+  &:hover::after,
+  &_prev--header:hover::after,
+  &_next--header:hover::after {
+    display: block;
+    transform: scale(1.1);
+  }
 
-        display   : block;
-        width     : 100%;
-        height    : 100%;
-        transform : scale(0);
-        transition: transform @link-effect;
-    }
+  &:focus,
+  &:active {
+    outline: none;
+  }
 
-    &:hover::after,
-    &_prev--header:hover::after,
-    &_next--header:hover::after {
-        display  : block;
-        transform: scale(1);
-    }
-
-    &:focus,
-    &:active {
-        outline: none;
-    }
-
-    & span {
-        display: none;
-    }
+  & span {
+    display: none;
+  }
 }
 
 .arrow_prev {
-    &::before {
-        background-image: url('../img/prev-sert.png');
-    }
+  &::before {
+    background-image: url('../img/sprites.png');
+    background-position-y: -161px;
+    background-position-x: -10px;
+  }
 
-    &--header::before {
-        background-image: url('../img/prev.png');
-    }
+  &--header::before {
+    background-image: url('../img/sprites.png');
+  }
 
-    &::after {
-        background-image: url('../img/active-prev-sert.png');
-    }
+  &::after {
+    background-image: url('../img/active-prev-sert.png');
+  }
 
-    &--header::after {
-        background-image: url('../img/un-prev.png');
-    }
+  &--header::after {
+    background-image: url('../img/un-prev.png');
+  }
 }
 
 .arrow_next {
-    &::before {
-        background-image: url('../img/next-sert.png');
-    }
+  &::before {
+    background-image: url('../img/sprites.png');
+    background-position-y: -100px;
+    background-position-x: -81px;
+  }
 
-    &--header::before {
-        background-image: url('../img/next.png');
-    }
+  &--header::before {
+    background-image: url('../img/sprites.png');
+    background-position: -10px -100px;
+  }
 
-    &::after {
-        background-image: url('../img/active-next-sert.png');
-    }
+  &::after {
+    background-image: url('../img/active-next-sert.png');
+  }
 
-    &--header::after {
-        background-image: url(../img/un-next.png);
-    }
+  &--header::after {
+    background-image: url(../img/un-next.png);
+  }
 }
