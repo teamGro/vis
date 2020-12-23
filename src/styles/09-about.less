@@ -1,8 +1,8 @@
 @import './01-variables.less';
 
 .about {
-  padding-top   : 50px;
-  padding-bottom: 50px;
+  padding-top  : 50px;
+  margin-bottom: 50px;
 
   &__subtitle {
     margin-bottom: 30px;
@@ -127,6 +127,10 @@
       background-color: #DF622C;
       opacity         : .5;
     }
+
+    & img {
+      width: 100%;
+    }
   }
 
   &__slider-num {
@@ -136,6 +140,8 @@
 
 @media (min-width: @tablet-width) {
   .about {
+    margin-bottom: 120px;
+
     &__list {
       flex-direction: row;
       flex-wrap     : wrap;
@@ -158,8 +164,8 @@
 
 @media (min-width: @desktop-width) {
   .about {
-    padding-top   : 140px;
-    padding-bottom: 120px;
+    padding-top: 140px;
+
 
     &__content {
       display        : flex;

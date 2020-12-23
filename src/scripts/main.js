@@ -269,7 +269,13 @@ aboutSlider.on('drag.owl.carousel', (e) => {
   }, 500);
 });
 
-let aboutItem = 1;
+let allImgs = $('.about__img');
 aboutSlider.on('changed.owl.carousel', function (e) {
   $('.about__slider-num').text(e.item.index - 1 + '/' + e.item.count);
+  let activeImg = allImgs[e.item.index + 1];
+  activeImg = activeImg.getAttribute('src');
+
+  setTimeout(() => {
+    cloneImg.attr('src', activeImg);
+  }, 500);
 });
