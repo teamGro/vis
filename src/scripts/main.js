@@ -280,3 +280,14 @@ aboutSlider.on('changed.owl.carousel', function (e) {
     cloneImg.attr('src', activeImg);
   }, 500);
 });
+
+import callbackHandler from './modalCallback';
+let btnModalTrigger = $('[data-type="callback"]');
+let modalContainer = $('.overlay_callback');
+let modal = $('.popup_calback');
+let btnModalClose = $('.popup__close');
+
+btnModalTrigger.each(function (i) {
+  $(this).on('click', callbackHandler.showOrHideModal);
+});
+btnModalClose.on('click', callbackHandler.modalCloseByClick);
