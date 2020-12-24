@@ -286,3 +286,6 @@ btnModalHandler();
 
 import scrollToNavElem from './navigateHandler';
 scrollToNavElem();
+
+import setActiveTabAndShowContent from './priceHandler';
+setActiveTabAndShowContent();
