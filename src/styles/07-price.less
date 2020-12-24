@@ -106,6 +106,19 @@
         color         : #000000;
         text-transform: uppercase;
     }
+
+    &__delivery {
+        font-family: Gotham Pro;
+        font-style : normal;
+        font-weight: normal;
+        font-size  : 16px;
+        line-height: 120%;
+        color      : #000000;
+
+        &:not(:last-child) {
+            margin-bottom: 20px;
+        }
+    }
 }
 
 .tabs {
@@ -138,15 +151,13 @@
             position: absolute;
             left    : 50%;
             bottom  : -16px;
-            z-index : 100;
+            z-index : 1;
 
             display   : block;
             width     : 20px;
             height    : 20px;
             transition: all @link-effect;
-
-            background-color: #fff;
-            transform       : rotate(45deg) translateX(-50%);
+            transform : rotate(45deg) translateX(-50%);
         }
 
         &_active {
@@ -220,6 +231,10 @@
         &__name_head,
         &__price_head {
             font-size: 24px;
+        }
+
+        &__delivery {
+            font-size: 19px;
         }
     }
 }
