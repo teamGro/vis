@@ -111,8 +111,48 @@
     const btnBottomElem = $('.burger__elem_bottom');
     const mobileMenu = $('.header__menu');
 
-    btnBurger.on('click', function () {
-      burgerHandler($(this), btnTopElem, btnMiddleElem, btnBottomElem, mobileMenu);
+    let navs = $('.navigation__list');
+
+    function scrollToNavElem() {
+        navs.on("click", (e) => {
+            let target = $(e.target);
+            if (target.prop("tagName") == "A") e.preventDefault();
+            let scrollName = target.attr("data-scroll");
+            let scrollElem = $(`.${scrollName}`);
+            let scrollTop = scrollElem.offset().top;
+
+            $('html, body').animate({
+                scrollTop: scrollTop
+            }, 500);
+            closeMenuIfNeeded();
+        });
+    }
+
+    function closeMenuIfNeeded() {
+        if (btnBurger.hasClass('burger_opened')) {
+            btnTopElem.animate();
+            btnMiddleElem.animate({
+                opacity: 1,
+            });
+            btnBottomElem.animate();
+
+            mobileMenu.removeClass('header__menu_open');
+            //sliderElem.play();
+
+            btnBurger.animate().removeClass('burger_opened').addClass('burger_closed');
+
+            return;
+        }
+    }
+
+    const btnBurger$1 = $('.burger');
+    const btnTopElem$1 = $('.burger__elem_top');
+    const btnMiddleElem$1 = $('.burger__elem_middle');
+    const btnBottomElem$1 = $('.burger__elem_bottom');
+    const mobileMenu$1 = $('.header__menu');
+
+    btnBurger$1.on('click', function () {
+      burgerHandler($(this), btnTopElem$1, btnMiddleElem$1, btnBottomElem$1, mobileMenu$1);
     });
 
     const telContainer = $('.header__contacts-expand');
@@ -384,7 +424,8 @@
       }, 500);
     });
     btnModalHandler();
+    scrollToNavElem();
 
 }());
 
-//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi5qcyIsInNvdXJjZXMiOltdLCJzb3VyY2VzQ29udGVudCI6W10sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OyJ9
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi5qcyIsInNvdXJjZXMiOltdLCJzb3VyY2VzQ29udGVudCI6W10sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7In0=

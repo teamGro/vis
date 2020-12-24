@@ -283,3 +283,6 @@ aboutSlider.on('changed.owl.carousel', function (e) {
 
 import btnModalHandler from './modalCallback';
 btnModalHandler();
+
+import scrollToNavElem from './navigateHandler';
+scrollToNavElem();
