@@ -3,8 +3,6 @@ let modalContainer = $('.overlay_callback');
 let modal = $('.popup_calback');
 let btnModalClose = $('.popup__close');
 
-let callbackHandler = {};
-
 function getModalCoordsAndShow() {
     let topScroll = $(window).scrollTop() + 60;
     modalContainer.addClass('overlay_active');
@@ -17,8 +15,7 @@ function hideModal() {
     modalContainer.removeClass('overlay_active');
 }
 
-callbackHandler.showOrHideModal = function () {
-    console.log(1)
+function showOrHideModal() {
     if (modalContainer.hasClass('overlay_active')) {
         hideModal();
         return;
@@ -27,16 +24,17 @@ callbackHandler.showOrHideModal = function () {
     getModalCoordsAndShow();
 }
 
-// function btnModalHandler() {
-//     btnModalTrigger.each(function (i) {
-//         $(this).on('click', showOrHideModal);
-//     });
-//     modalCloseByClick();
-// }
-
-callbackHandler.modalCloseByClick = function () {
-    btnModalClose.on('click', hideModal());
+function btnModalHandler() {
+    btnModalTrigger.each(function (i) {
+        $(this).on('click', showOrHideModal);
+    });
+    modalCloseByClick();
 }
 
-export default callbackHandler;
+function modalCloseByClick() {
+    console.log(1)
+    btnModalClose.on('click', hideModal);
+}
+
+export default btnModalHandler;
 
