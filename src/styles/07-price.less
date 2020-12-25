@@ -1,6 +1,7 @@
 @import './01-variables.less';
 
 .price {
+  position: relative;
   margin-top: -40px;
   padding-top: 50px;
   padding-bottom: 50px;
@@ -191,6 +192,45 @@
   }
 }
 
+.tooltip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+
+  display: flex;
+  flex-direction: column;
+  padding: 23px 12px;
+  max-width: 180px;
+  height: auto;
+  border-radius: 3px;
+
+  background: #f6f6f6;
+
+  &__text {
+    font-family: Gotham Pro;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 110%;
+    color: #000000;
+
+    &_bold {
+      margin-bottom: 15px;
+
+      font-weight: bold;
+      font-size: 12px;
+    }
+  }
+
+  &__img {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%) rotate(90deg);
+  }
+}
+
 @media (min-width: @tablet-width) {
   .price {
     &__tabs-list {
@@ -252,6 +292,16 @@
 
     &__delivery {
       font-size: 19px;
+    }
+  }
+
+  .tooltip {
+    &__text {
+      font-size: 11px;
+
+      &_bold {
+        font-weight: 13px;
+      }
     }
   }
 }

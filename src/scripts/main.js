@@ -214,7 +214,6 @@ $('[data-fancybox="gallery"]').fancybox({
   },
 });
 
-
 //delivery
 const agreeLabel = $('.delivery__agree');
 agreeLabel.on('click', function () {
@@ -287,5 +286,6 @@ btnModalHandler();
 import scrollToNavElem from './navigateHandler';
 scrollToNavElem();
 
-import setActiveTabAndShowContent from './priceHandler';
-setActiveTabAndShowContent();
+import price from './priceHandler';
+price.setActiveTabAndShowContent();
+price.showAndHideTooltip();
