@@ -11,6 +11,10 @@
     margin-bottom: 30px;
   }
 
+  &__container {
+    min-height: 480px;
+  }
+
   &__list {
     display: flex;
     flex-direction: column;
@@ -28,6 +32,11 @@
     font-style: normal;
     font-size: 16px;
     line-height: 120%;
+    animation: fade-in 0.5s linear forwards;
+
+    &_inactive {
+      animation: fadeOut 0.5s linear forwards;
+    }
 
     &:hover {
       cursor: pointer;
@@ -118,6 +127,11 @@
     font-size: 16px;
     line-height: 120%;
     color: #000000;
+    animation: fade-in 0.5s linear;
+
+    &_inactive {
+      animation: fadeOut 0.5s linear;
+    }
 
     &:not(:last-child) {
       margin-bottom: 20px;
@@ -244,4 +258,22 @@
 
 @media (min-width: 1920px) {
   padding: 0;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
