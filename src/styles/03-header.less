@@ -169,14 +169,28 @@
     text-transform: uppercase;
     color: @header-font-color;
     transition: color @link-effect, border @link-effect;
-  }
 
-  &__callback:hover,
-  &__callback:focus,
-  &__callback:active {
-    outline: none;
-    color: @hover-font-color;
-    border: 3px solid @hover-font-color;
+    &:hover,
+    &:focus,
+    &:active {
+      outline: none;
+      color: @hover-font-color;
+      border: 3px solid @hover-font-color;
+    }
+
+    &_desctop {
+      display: none;
+    }
+
+    &_mobile {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 5px 15px;
+      border-width: 2px;
+      font-size: 14px;
+    }
   }
 
   &__wrapper_bottom {
@@ -509,6 +523,16 @@
 
     &__contacts-item_whatsapp {
       padding-left: 40px;
+    }
+
+    &__callback {
+      &_mobile {
+        display: none;
+      }
+
+      &_desctop {
+        display: flex;
+      }
     }
 
     &__wrapper_bottom {
