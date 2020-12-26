@@ -288,4 +288,5 @@ scrollToNavElem();
 
 import price from './priceHandler';
 price.setActiveTabAndShowContent();
-price.showAndHideTooltip();
+//price.showAndHideTooltip();
+price.closeTooltipByClick();

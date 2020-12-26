@@ -1,14 +1,14 @@
 @import './01-variables.less';
 
 .price {
-  position: relative;
-  margin-top: -40px;
-  padding-top: 50px;
+  position      : relative;
+  margin-top    : -40px;
+  padding-top   : 50px;
   padding-bottom: 50px;
-  text-align: center;
+  text-align    : center;
 
   &__tabs-list {
-    padding-left: 10px;
+    padding-left : 10px;
     margin-bottom: 30px;
   }
 
@@ -17,23 +17,23 @@
   }
 
   &__list {
-    display: flex;
+    display       : flex;
     flex-direction: column;
   }
 
   &__item {
-    position: relative;
-    padding: 42px 20px 18px;
-    display: flex;
-    flex-wrap: wrap;
+    position          : relative;
+    padding           : 42px 20px 18px;
+    display           : flex;
+    flex-wrap         : wrap;
     // justify-content: center;
-    border-bottom: 3px solid #f2f2f2;
+    border-bottom     : 3px solid #f2f2f2;
 
     font-family: Gotham Pro;
-    font-style: normal;
-    font-size: 16px;
+    font-style : normal;
+    font-size  : 16px;
     line-height: 120%;
-    animation: fade-in 0.5s linear forwards;
+    animation  : fade-in 0.5s linear forwards;
 
     &_inactive {
       animation: fadeOut 0.5s linear forwards;
@@ -46,49 +46,49 @@
     //flex-wrap: wrap;
     &_head {
       background-color: #f6f6f6;
-      justify-content: space-between;
+      justify-content : space-between;
     }
   }
 
   &__img-wrap {
     position: absolute;
-    top: 17px;
-    left: 20px;
+    top     : 17px;
+    left    : 20px;
   }
 
   &__item-wrap {
-    width: 100%;
-    flex-wrap: wrap;
-    display: flex;
+    width          : 100%;
+    flex-wrap      : wrap;
+    display        : flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom  : 20px;
   }
 
   &__name {
     margin-bottom: 20px;
-    font-weight: bold;
+    font-weight  : bold;
     //align-items: center;
-    color: #000000;
+    color        : #000000;
   }
 
   &__price {
     font-family: Gotham Pro;
-    font-style: normal;
+    font-style : normal;
     font-weight: normal;
-    font-size: 16px;
+    font-size  : 16px;
     line-height: 120%;
-    color: #000000;
+    color      : #000000;
   }
 
   &__btn {
-    display: flex;
-    padding: 19px 40px;
+    display      : flex;
+    padding      : 19px 40px;
     border-radius: 3px;
 
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 110%;
-    color: #ffffff;
+    font-weight   : bold;
+    font-size     : 14px;
+    line-height   : 110%;
+    color         : #ffffff;
     text-transform: uppercase;
 
     background: #df622c;
@@ -97,38 +97,38 @@
     &:hover,
     &:focus,
     &:active {
-      outline: none;
+      outline   : none;
       box-shadow: 0px 7px 15px rgba(116, 52, 32, 0.6);
     }
 
     & span {
-      display: inline-block;
+      display     : inline-block;
       margin-right: 10px;
     }
 
     & img {
-      display: inline-block;
+      display  : inline-block;
       max-width: 8px !important;
     }
   }
 
   &__name_head,
   &__price_head {
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 120%;
-    color: #000000;
+    font-weight   : bold;
+    font-size     : 20px;
+    line-height   : 120%;
+    color         : #000000;
     text-transform: uppercase;
   }
 
   &__delivery {
     font-family: Gotham Pro;
-    font-style: normal;
+    font-style : normal;
     font-weight: normal;
-    font-size: 16px;
+    font-size  : 16px;
     line-height: 120%;
-    color: #000000;
-    animation: fade-in 0.5s linear;
+    color      : #000000;
+    animation  : fade-in 0.5s linear;
 
     &_inactive {
       animation: fadeOut 0.5s linear;
@@ -141,22 +141,22 @@
 }
 
 .tabs {
-  display: flex;
-  width: 100%;
+  display       : flex;
+  width         : 100%;
   padding-bottom: 20px;
-  overflow-x: auto;
+  overflow-x    : auto;
 
   &__item {
-    position: relative;
-    min-width: 190px;
+    position     : relative;
+    min-width    : 190px;
     border-radius: 3px;
-    padding: 20px;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 20px;
-    text-align: center;
-    color: #000000;
-    z-index: 5;
+    padding      : 20px;
+    font-weight  : bold;
+    font-size    : 20px;
+    line-height  : 20px;
+    text-align   : center;
+    color        : #000000;
+    z-index      : 5;
 
     background: #f7f7f7;
     transition: all @link-effect;
@@ -166,68 +166,93 @@
     }
 
     &::after {
-      content: '';
+      content : '';
       position: absolute;
-      left: 50%;
-      bottom: -16px;
-      z-index: 1;
+      left    : 50%;
+      bottom  : -16px;
+      z-index : 1;
 
-      display: block;
-      width: 20px;
-      height: 20px;
+      display   : block;
+      width     : 20px;
+      height    : 20px;
       transition: all @link-effect;
-      transform: rotate(45deg) translateX(-50%);
+      transform : rotate(45deg) translateX(-50%);
     }
 
     &_active {
-      color: #fff;
+      color           : #fff;
       background-color: #404758;
-      transition: all @link-effect;
+      transition      : all @link-effect;
 
       &::after {
-        content: '';
+        content         : '';
         background-color: #404758;
       }
+    }
+
+    &:hover {
+      cursor: pointer;
     }
   }
 }
 
 .tooltip {
   position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
+  top     : 0;
+  left    : 0;
+  opacity : 0;
 
-  display: flex;
+  display       : flex;
   flex-direction: column;
-  padding: 23px 12px;
-  max-width: 180px;
-  height: auto;
-  border-radius: 3px;
+  padding       : 23px 12px;
+  max-width     : 180px;
+  height        : auto;
+  border-radius : 3px;
 
   background: #f6f6f6;
+  transition: all @link-effect;
+
+  &_active {
+    opacity  : 1;
+    left     : 50%;
+    transform: translateX(-50%);
+  }
 
   &__text {
     font-family: Gotham Pro;
-    font-style: normal;
+    font-style : normal;
     font-weight: normal;
-    font-size: 10px;
+    font-size  : 10px;
     line-height: 110%;
-    color: #000000;
+    color      : #000000;
 
     &_bold {
       margin-bottom: 15px;
 
       font-weight: bold;
-      font-size: 12px;
+      font-size  : 12px;
     }
   }
 
   &__img {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
+    position : absolute;
+    bottom   : 0;
+    left     : 50%;
     transform: translate(-50%, 50%) rotate(90deg);
+  }
+
+  &__close {
+    position: absolute;
+    top     : 2px;
+    right   : 5px;
+    color   : #000;
+
+    &:hover,
+    &:focus,
+    &:active {
+      outline: none;
+    }
+
   }
 }
 
@@ -235,26 +260,26 @@
   .price {
     &__tabs-list {
       padding-left: 30px;
-      max-width: 940px;
+      max-width   : 940px;
       margin-right: auto;
-      margin-left: auto;
+      margin-left : auto;
     }
 
     &__list {
-      max-width: 940px;
+      max-width   : 940px;
       margin-right: auto;
-      margin-left: auto;
+      margin-left : auto;
     }
 
     &__item {
-      flex-wrap: nowrap;
+      flex-wrap  : nowrap;
       align-items: center;
     }
 
     &__item-wrap {
-      margin-right: 45px;
+      margin-right : 45px;
       margin-bottom: 0;
-      width: calc(100% - 235px);
+      width        : calc(100% - 235px);
     }
 
     &__name {
@@ -273,8 +298,8 @@
 
 @media (min-width: @desktop-width) {
   .price {
-    margin-top: -70px;
-    padding-top: 130px;
+    margin-top    : -70px;
+    padding-top   : 130px;
     padding-bottom: 120px;
 
     &__tabs-list {
@@ -304,6 +329,8 @@
       }
     }
   }
+
+
 }
 
 @media (min-width: 1920px) {
@@ -314,6 +341,7 @@
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
@@ -323,6 +351,7 @@
   0% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }

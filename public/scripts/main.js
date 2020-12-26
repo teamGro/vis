@@ -150,6 +150,7 @@
     const tabs = $('.tabs');
     const tooltip = $('.tooltip');
     const itemsContainer = $('.price__list');
+    const tooltipCloseBtn = $('.tooltip__close');
 
     let markup = {
       delivery: {
@@ -258,6 +259,7 @@
         ],
       },
     };
+
     price.setActiveTabAndShowContent = function () {
       tabs.on('click', function (e) {
         let $target = $(e.target);
@@ -311,17 +313,53 @@
           $target = $target.closest('.price__item');
           showTooltip($target, tooltip);
         });
-        //$(this).on('mouseout', hideTooltip);
+
+        $(this).on('mouseenter', (e) => {
+          let $target = $(e.target);
+          $target = $target.closest('.price__item');
+          showTooltip($target, tooltip);
+        });
+        $(this).on('mouseout', function (e) {
+          let $target = $(e.target);
+          hideTooltip();
+        });
+
       });
     };
 
-    function showTooltip(target, tooltip) {
-      let targetWidth = target.width() / 2;
-      let targetPosition = target.position();
-      console.log(targetPosition);
-      tooltip.addClass('tooltip_active');
-      tooltip.css('top');
+    let tooltipContent = {
+      content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam posuere lacinia ex, vel
+  ullamcorper leo consequat eu. Donec auctor odio sem`
+    };
+
+    function hideTooltip(target) {
+      tooltip.removeClass('tooltip_active');
+      tooltip.find('.tooltip__text_normal').empty();
     }
+
+
+
+    function showTooltip(target, tooltip) {
+      if (tooltip.hasClass('tooltip_active')) {
+        tooltip.removeClass('tooltip_active');
+        tooltip.find('.tooltip__text_normal').empty();
+      }
+
+      //let tooltipHeight = ;
+      let targetPosition = target.offset().top - tooltip.height() - target.height();//
+      //console.log(tooltipHeight)
+      //console.log(targetPosition)
+      tooltip.find('.tooltip__text_normal').text(tooltipContent.content);
+
+      tooltip.addClass('tooltip_active');
+      tooltip.css('top', targetPosition + 'px');
+    }
+
+    price.closeTooltipByClick = function () {
+      tooltipCloseBtn.on('click', (e) => {
+        $(e.target).parent().removeClass('tooltip_active');
+      });
+    };
 
     const btnBurger$1 = $('.burger');
     const btnTopElem$1 = $('.burger__elem_top');
@@ -603,8 +641,9 @@
     btnModalHandler();
     scrollToNavElem();
     price.setActiveTabAndShowContent();
-    price.showAndHideTooltip();
+    //price.showAndHideTooltip();
+    price.closeTooltipByClick();
 
 }());
 
-//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi5qcyIsInNvdXJjZXMiOltdLCJzb3VyY2VzQ29udGVudCI6W10sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OzsifQ==
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi5qcyIsInNvdXJjZXMiOltdLCJzb3VyY2VzQ29udGVudCI6W10sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OzsifQ==
