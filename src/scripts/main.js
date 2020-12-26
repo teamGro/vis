@@ -204,7 +204,7 @@ $('[data-fancybox="gallery"]').fancybox({
     arrowRight: `<button data-fancybox-next class="fancybox-button fancybox-button--arrow_right cert__gallery-arrow cert__gallery-arrow_next" title="{{NEXT}}"></button>`,
   },
   afterClose: function () {
-    console.log(1);
+
     if (certSliderDirection == 'ltr') {
       setLtr();
       return;
@@ -218,6 +218,7 @@ $('[data-fancybox="gallery"]').fancybox({
 const agreeLabel = $('.delivery__agree');
 agreeLabel.on('click', function () {
   if ($(this).hasClass('delivery__agree_active')) {
+    console.log(1);
     $(this).parent().find('input').attr('checked', false);
     $(this).removeClass('delivery__agree_active');
     return;

@@ -152,7 +152,12 @@
   }
 
   &__contacts-expand {
-    display: none;
+    display                   : none;
+    padding                   : 10px;
+    margin-left               : -10px;
+    background-color          : #fff;
+    border-bottom-left-radius : 5px;
+    border-bottom-right-radius: 5px;
   }
 
   &__tel_add {
@@ -267,7 +272,7 @@
 
     transition: background-color @link-effect, border-color @link-effect;
 
-    &_:hover,
+    &:hover,
     &:focus,
     &:active {
       outline     : none;

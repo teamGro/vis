@@ -47,6 +47,17 @@
         margin-bottom: 20px;
     }
 
+    &__nav {
+        transition: color @link-effect;
+
+        &:hover,
+        &:focus,
+        &:active {
+            outline: none;
+            color  : #df622c
+        }
+    }
+
     &__right {
         display        : flex;
         justify-content: space-around;
