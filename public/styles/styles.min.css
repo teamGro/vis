@@ -248,6 +248,14 @@ button {
 .header__contacts-expand {
   display: none;
 }
+
+.header__contacts-expand {
+  margin-left: -10px;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+}
+
 .header__tel-btn {
   width: 15px;
   height: 10px;
