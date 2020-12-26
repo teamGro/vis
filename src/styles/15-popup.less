@@ -80,6 +80,31 @@
       background-color: #fff;
     }
   }
+
+  &__btn-send {
+    max-width    : 220px;
+    margin-top   : 20px;
+    border       : 3px solid #ffffff;
+    box-sizing   : border-box;
+    border-radius: 3px;
+    padding      : 14px 30px;
+
+    font-weight: bold;
+    font-size  : 20px;
+    line-height: 20px;
+    color      : #ffffff;
+
+    transition: color @link-effect, border @link-effect ;
+
+    &:hover,
+    &:focus,
+    &:active {
+      outline: none;
+      color  : @hover-font-color;
+      border : 3px solid @hover-font-color;
+
+    }
+  }
 }
 
 .callback-form {
@@ -120,8 +145,6 @@
     line-height: 20px;
     color      : #ffffff;
   }
-
-
 }
 
 @media (min-width: @tablet-width) {
@@ -144,6 +167,12 @@
       padding-left : 70px;
       padding-right: 70px;
       margin-left  : auto;
+    }
+  }
+
+  .popup {
+    &__close {
+      right: -17%;
     }
   }
 }

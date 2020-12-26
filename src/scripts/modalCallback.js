@@ -4,7 +4,7 @@ let modal = $('.popup_calback');
 let btnModalClose = $('.popup__close');
 
 function getModalCoordsAndShow() {
-    let topScroll = $(window).scrollTop() + 60;
+    let topScroll = $(window).scrollTop() + $(window).height() / 2 - modal.height() / 2;
     modalContainer.addClass('overlay_active');
     modal.css('transform', `translateY(${topScroll}px)`);
     modalContainer.css('transform', 'translateX(0)');

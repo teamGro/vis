@@ -290,3 +290,13 @@ import price from './priceHandler';
 price.setActiveTabAndShowContent();
 //price.showAndHideTooltip();
 price.closeTooltipByClick();
+
+import orderHandler from './modalOrder';
+new orderHandler.CustomSelect({
+  elem: document.getElementById("district-select"),
+});
+
+orderHandler.showModal();
+orderHandler.setAttrChecked();
+orderHandler.setCheckedAttrForRadio();
+orderHandler.setCheckedAttrForRadio();

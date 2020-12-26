@@ -67,13 +67,13 @@
 
     // slider.headerSlider = new Glide('.glide', {
 
-    let btnModalTrigger = $('[data-type="callback"]');
+    let btnModalTrigger$1 = $('[data-type="callback"]');
     let modalContainer = $('.overlay_callback');
     let modal = $('.popup_calback');
     let btnModalClose = $('.popup__close');
 
     function getModalCoordsAndShow() {
-        let topScroll = $(window).scrollTop() + 60;
+        let topScroll = $(window).scrollTop() + $(window).height() / 2 - modal.height() / 2;
         modalContainer.addClass('overlay_active');
         modal.css('transform', `translateY(${topScroll}px)`);
         modalContainer.css('transform', 'translateX(0)');
@@ -94,13 +94,13 @@
     }
 
     function btnModalHandler() {
-        btnModalTrigger.each(function (i) {
+        btnModalTrigger$1.each(function (i) {
             $(this).on('click', showOrHideModal);
         });
-        modalCloseByClick();
+        modalCloseByClick$1();
     }
 
-    function modalCloseByClick() {
+    function modalCloseByClick$1() {
         console.log(1);
         btnModalClose.on('click', hideModal);
     }
@@ -189,7 +189,7 @@
             <span class="price__name">Бетон В 22.5 М 300</span>
             <span class="price__price">3 450 руб / м3 </span>
         </div>
-        <button type="button" class="price__btn" data-type="callback">
+        <button type="button" class="price__btn">
             <span>Подробнее</span>
             <img src="./img/arrow-btn-header.png" alt="" />
         </button>
@@ -217,7 +217,7 @@
             <span class="price__name">${data.name}</span>
             <span class="price__price">${data.price}</span>
         </div>
-        <button type="button" class="price__btn" data-type="callback">
+        <button type="button" class="price__btn">
             <span>Подробнее</span>
             <img src="./img/arrow-btn-header.png" alt="" />
         </button>
@@ -359,6 +359,147 @@
       tooltipCloseBtn.on('click', (e) => {
         $(e.target).parent().removeClass('tooltip_active');
       });
+    };
+
+    let orderHandler = {};
+    // var animalSelect = new CustomSelect({
+    //     elem: document.getElementById("district-select"),
+    // });
+
+    orderHandler.CustomSelect = function (options) {
+        var elem = options.elem;
+
+        elem.onclick = function (event) {
+            if (event.target.className == "order-form__select-title") {
+                toggle();
+            } else if (event.target.tagName == "LI") {
+                setValue(event.target.innerHTML, event.target.dataset.value);
+                close();
+            }
+        };
+
+        var isOpen = false;
+
+        // ------ обработчики ------
+
+        // закрыть селект, если клик вне его
+        function onDocumentClick(event) {
+            if (!elem.contains(event.target)) close();
+        }
+
+        // ------------------------
+
+        function setValue(title, value) {
+            elem.querySelector(".order-form__select-title").innerHTML = title;
+
+            var widgetEvent = new CustomEvent("select", {
+                bubbles: true,
+                detail: {
+                    title: title,
+                    value: value,
+                },
+            });
+
+            elem.dispatchEvent(widgetEvent);
+        }
+
+        function toggle() {
+            if (isOpen) close();
+            else open();
+        }
+
+        function open() {
+            elem.classList.add("open");
+            document.addEventListener("click", onDocumentClick);
+            isOpen = true;
+        }
+
+        function close() {
+            elem.classList.remove("open");
+            document.removeEventListener("click", onDocumentClick);
+            isOpen = false;
+        }
+    };
+
+    let priceList = $(".price__list");
+    let priceBtn = $(".price__btn");
+    let orderModalContainer = $(".overlay_order");
+    let orderModal = $(".popup_order");
+    let btnModalClose$1 = $(".popup__close_order");
+
+    orderHandler.showModal = function () {
+        priceList.on("click", (e) => {
+            console.log($(e.target).prop("tagName"), $(e.target).parent());
+            if ($(e.target).prop("tagName") == "BUTTON" || $(e.target).parent().prop("tagName") == "BUTTON") {
+                let elem = $(e.target).closest(".price__item");
+                let name = elem.find(".price__name").text();
+                let price = elem.find(".price__price").text();
+                $(".order-form__choice").text(name);
+                $(".order-form__price").text(price);
+                getModalCoordsAndShow$1();
+            }
+            return;
+        });
+
+        btnModalClose$1.on("click", hideModal$1);
+    };
+
+
+    function getModalCoordsAndShow$1() {
+        let topScroll = $(window).scrollTop() + $(window).height() / 2 - orderModal.height() / 2;
+        orderModalContainer.addClass("overlay_active");
+        orderModal.css("transform", `translateY(${topScroll}px)`);
+        orderModalContainer.css("transform", "translateX(0)");
+    }
+
+    function hideModal$1() {
+        orderModalContainer.css("transform", "translateX(-100vw)");
+        orderModalContainer.removeClass("overlay_active");
+        $(".order-form__choice").text("");
+        $(".order-form__price").text("");
+    }
+
+    btnModalClose$1.on("click", hideModal$1);
+
+
+    const labelRent = $('.order-form__label_rent');
+    const labelSnow = $('.order-form__label_snow');
+
+    orderHandler.setAttrChecked = function () {
+        labelRent.on('click', function () {
+            setNameAttrForElem($(this), 'order-form__label_rent-active');
+        });
+
+        labelSnow.on('click', function () {
+            setNameAttrForElem($(this), 'order-form__label_snow-active');
+        });
+    };
+
+    function setNameAttrForElem(elem, clsNameActive) {
+        if (elem.hasClass(clsNameActive)) {
+            elem.parent().find('input').attr('checked', false);
+            elem.removeClass(clsNameActive);
+            return;
+        }
+        elem.parent().find('input').attr('checked', true);
+        elem.addClass(clsNameActive);
+    }
+
+    let radioElems = $('.order-form__radio-label');
+    orderHandler.setCheckedAttrForRadio = function () {
+        let currentChecked = null;
+        radioElems.on('click', function (e) {
+
+            if (currentChecked) {
+                console.log(currentChecked);
+                currentChecked.removeClass('order-form__radio_active');
+                currentChecked.parent().find('input').attr('checked', false);
+            }
+            $(e.target).parent().find('input').attr('checked', true);
+            $(e.target).addClass('order-form__radio_active');
+            currentChecked = $(e.target);
+
+        });
     };
 
     const btnBurger$1 = $('.burger');
@@ -643,7 +784,15 @@
     price.setActiveTabAndShowContent();
     //price.showAndHideTooltip();
     price.closeTooltipByClick();
+    new orderHandler.CustomSelect({
+      elem: document.getElementById("district-select"),
+    });
+
+    orderHandler.showModal();
+    orderHandler.setAttrChecked();
+    orderHandler.setCheckedAttrForRadio();
+    orderHandler.setCheckedAttrForRadio();
 
 }());
 
-//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi5qcyIsInNvdXJjZXMiOltdLCJzb3VyY2VzQ29udGVudCI6W10sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OzsifQ==
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi5qcyIsInNvdXJjZXMiOltdLCJzb3VyY2VzQ29udGVudCI6W10sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OyJ9

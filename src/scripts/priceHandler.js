@@ -42,7 +42,7 @@ let markup = {
             <span class="price__name">Бетон В 22.5 М 300</span>
             <span class="price__price">3 450 руб / м3 </span>
         </div>
-        <button type="button" class="price__btn" data-type="callback">
+        <button type="button" class="price__btn">
             <span>Подробнее</span>
             <img src="./img/arrow-btn-header.png" alt="" />
         </button>
@@ -70,7 +70,7 @@ let markup = {
             <span class="price__name">${data.name}</span>
             <span class="price__price">${data.price}</span>
         </div>
-        <button type="button" class="price__btn" data-type="callback">
+        <button type="button" class="price__btn">
             <span>Подробнее</span>
             <img src="./img/arrow-btn-header.png" alt="" />
         </button>
