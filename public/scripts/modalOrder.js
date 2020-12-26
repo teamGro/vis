@@ -76,7 +76,7 @@ priceList.on("click", (e) => {
 });
 
 function getModalCoordsAndShow() {
-  let topScroll = $(window).scrollTop() + 60;
+  let topScroll = $(window).scrollTop() + $(window).height() / 2 - orderModal.height() / 2;
   orderModalContainer.addClass("overlay_active");
   orderModal.css("transform", `translateY(${topScroll}px)`);
   orderModalContainer.css("transform", "translateX(0)");
