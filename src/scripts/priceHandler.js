@@ -120,6 +120,7 @@ price.setActiveTabAndShowContent = function () {
 
     setActiveTab($target, $(this));
     showContent($target);
+    hideTooltip(tooltip);
   });
 };
 
