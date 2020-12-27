@@ -1,14 +1,16 @@
 @import './01-variables.less';
 
+@width: calc(100vw - 15%);
+
 .about {
-  padding-top: 50px;
+  padding-top  : 50px;
   margin-bottom: 50px;
 
   &__subtitle {
     margin-bottom: 30px;
-    font-weight: bold;
-    font-size: 2.5rem;
-    line-height: 40px;
+    font-weight  : bold;
+    font-size    : 2.5rem;
+    line-height  : 40px;
 
     & span {
       color: #df622c;
@@ -17,9 +19,9 @@
 
   &__text {
     font-family: Gotham Pro;
-    font-style: normal;
+    font-style : normal;
     font-weight: normal;
-    font-size: 20px;
+    font-size  : 20px;
     line-height: 120%;
 
     &_orange {
@@ -40,96 +42,122 @@
   }
 
   &__info {
-    margin-bottom: 30px;
+    margin-bottom : 30px;
     padding-bottom: 30px;
-    border-bottom: 3px solid #f2f2f2;
+    border-bottom : 3px solid #f2f2f2;
   }
 
   &__list {
-    margin-top: 30px;
-    margin-bottom: 30px;
-    display: flex;
+    margin-top    : 30px;
+    margin-bottom : 30px;
+    display       : flex;
     flex-direction: column;
   }
 
   &__item {
-    position: relative;
+    position    : relative;
     padding-left: 38px;
 
     font-family: Gotham Pro;
-    font-style: normal;
+    font-style : normal;
     font-weight: normal;
-    font-size: 18px;
+    font-size  : 18px;
     line-height: 120%;
-    color: #000000;
+    color      : #000000;
 
     &:not(:last-child) {
       margin-bottom: 15px;
     }
 
     &::before {
-      content: '';
+      content : '';
       position: absolute;
-      left: 0;
+      left    : 0;
 
       display: block;
-      width: 15px;
-      height: 100%;
+      width  : 15px;
+      height : 100%;
 
-      background-image: url('../img/about-elem.png');
-      background-repeat: no-repeat;
+      background-image   : url('../img/about-elem.png');
+      background-repeat  : no-repeat;
       background-position: center;
     }
   }
 
   &__gallery-wrapper {
     position: relative;
-    width: 80%;
-    margin-left: auto;
+    width   : @width;
+    height  : @width;
+
+    display       : flex;
+    flex-direction: column;
+    align-items   : flex-end;
+
+    max-width   : 600px;
+    margin-left : auto;
     margin-right: auto;
+
+    outline: 1px solid red;
   }
 
   &__gallery-list {
     position: relative;
-    width: 100%;
-    height: auto;
-    z-index: 5;
+    width   : 100%;
+    height  : 100%;
+    z-index : 5;
+
+    height : 100%;
+    outline: 1px solid blue;
   }
 
   &__gallery-item {
-    width: 100%;
+    width        : 100%;
+    height       : 100%;
     // box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+
+  &__img {
+    object-fit: fill !important;
+    width     : 100%;
+    height    : 100%;
   }
 
   &__gallery-item-clone {
     position: absolute;
 
-    top: 4%;
-    left: 4%;
+    top : 15px;
+    left: 15px;
 
-    width: 100%;
-    z-index: 1;
+    width        : 100%;
+    z-index      : 1;
     // transform : translateX(5%);
     // margin-top: -88%;
-    z-index: 1;
+    z-index      : 1;
+
+    height : 100%;
+    outline: 1px solid black;
 
     &::after {
       content: '';
 
       position: absolute;
-      left: 0;
-      top: 0;
+      left    : 0;
+      top     : 0;
 
-      display: block;
-      width: 100%;
-      height: 100%;
+      display         : block;
+      width           : 100%;
+      height          : 100%;
       background-color: #df622c;
-      opacity: 0.5;
+      opacity         : 0.5;
     }
 
     & img {
       width: 100%;
     }
+  }
+
+  &__img-clone {
+    height: 100%;
   }
 
   &__slider-num {
@@ -143,8 +171,8 @@
 
     &__list {
       flex-direction: row;
-      flex-wrap: wrap;
-      align-items: center;
+      flex-wrap     : wrap;
+      align-items   : center;
     }
 
     &__item {
@@ -159,6 +187,11 @@
         margin-bottom: 30px;
       }
     }
+
+    &__gallery-item-clone {
+      top : 25px;
+      left: 25px;
+    }
   }
 }
 
@@ -166,19 +199,25 @@
   .about {
     padding-top: 140px;
 
+    &__container {
+      max-width: 1550px;
+    }
+
     &__content {
-      display: flex;
+      display        : flex;
       justify-content: space-between;
     }
 
     &__wrapper {
-      max-width: 720px;
+      max-width        : 720px;
+      padding-right    : 50px;
+      //margin-left    : -50px;
       // margin-right: 100px;
     }
 
     &__subtitle {
       margin-bottom: 44px;
-      font-size: 40px;
+      font-size    : 40px;
     }
 
     &__text {
@@ -190,14 +229,15 @@
     }
 
     &__gallery-wrapper {
-      display: flex;
-      flex-grow: 1;
-      max-width: 752px;
-      align-items: flex-end;
+      display       : flex;
+      flex-grow     : 1;
+      max-width     : 752px;
+      align-items   : flex-end;
+      //margin-right: -50px;
     }
 
     &__gallery-list {
-      display: flex !important;
+      display    : flex !important;
       align-items: flex-end;
     }
 
@@ -207,26 +247,31 @@
     }
 
     &__gallery-item-clone {
-      top: auto;
-      left: 8%;
-      bottom: -8%;
-      width: 100%;
+      // top   : auto;
+      // left  : 8%;
+      // bottom: -8%;
+      // width : 100%;
+    }
+
+    &__gallery-item-clone {
+      top : 75px;
+      left: 75px;
     }
 
     &__slider-num {
       position: absolute;
-      bottom: -5%;
-      left: 233px;
+      bottom  : -6%;
+      left    : 233px;
 
       display: block;
-      width: 38px;
-      height: 20px;
+      width  : 38px;
+      height : 20px;
 
       font-weight: bold;
-      font-size: 20px;
+      font-size  : 20px;
       line-height: 20px;
-      text-align: center;
-      color: #ffffff;
+      text-align : center;
+      color      : #ffffff;
 
       z-index: 15;
     }
@@ -234,10 +279,10 @@
 }
 
 .animated {
-  -webkit-animation-duration: 1000 ms;
-  animation-duration: 1000 ms;
+  -webkit-animation-duration : 1000 ms;
+  animation-duration         : 1000 ms;
   -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
+  animation-fill-mode        : both;
 }
 
 .owl-animated-out {
@@ -250,17 +295,17 @@
 
 .fadeOut {
   -webkit-animation-name: fadeOut;
-  animation-name: fadeOut;
+  animation-name        : fadeOut;
 }
 
 @keyframes fadeIn {
   0% {
-    opacity: 0;
+    opacity  : 0;
     transform: translate(14%, 50%);
   }
 
   100% {
-    opacity: 1;
+    opacity  : 1;
     transform: translate(0%, 0%);
   }
 }

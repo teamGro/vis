@@ -250,7 +250,7 @@ aboutSlider.owlCarousel({
   margin: 100,
   dots: false,
   navContainerClass: 'arrows arrows_about',
-  navClass: ['arrow arrow_prev', 'arrow arrow_next'],
+  navClass: ['arrow arrow_prev arrow_prev--about', 'arrow arrow_next'],
   items: 1,
   animateOut: 'slideOutLeft',
   // animateIn: 'slideInUp',
