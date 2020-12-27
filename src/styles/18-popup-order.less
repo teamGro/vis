@@ -348,4 +348,44 @@
     .order-form__wrap {
         flex-direction: row;
     }
+
+    .order-form {
+        &__chk-wrap {
+            flex-direction: row;
+        }
+
+        &__chk-left {
+            margin-bottom: 0;
+            margin-right : 2%;
+            width        : 49%;
+            padding-left : 66px;
+            height       : 66px;
+
+            background-image   : url('../img/modal-order-snow.png');
+            background-repeat  : no-repeat;
+            background-position: left center;
+
+        }
+
+        &__label {
+            top      : 50%;
+            transform: translateY(-50%);
+            max-width: 120px;
+        }
+
+        &__chk-right {
+            width       : 49%;
+            height      : 66px;
+            padding-left: 66px;
+
+            background-image   : url('../img/modal-order-rent.png');
+            background-repeat  : no-repeat;
+            background-position: left center;
+
+        }
+
+        &__btn {
+            margin-top: 0;
+        }
+    }
 }

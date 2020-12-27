@@ -161,25 +161,36 @@ function showContent(target) {
   createMarkup(markup[attr], $('.price__list'));
 }
 
+let itemPrice = $('.price__item');
 price.showAndHideTooltip = function () {
-  itemsContainer.each(function (i) {
-    $(this).on('click', (e) => {
-      let $target = $(e.target);
-      $target = $target.closest('.price__item');
-      showTooltip($target, tooltip);
-    });
+  itemPrice.hover(
+    function (e) {
+      console.log($(e.target));
+      showTooltip($(e.target), tooltip);
+    },
+    function (e) {
+      console.log(2);
+      hideTooltip(tooltip);
+    }
+  )
+  // itemsContainer.each(function (i) {
+  //   $(this).on('click', (e) => {
+  //     let $target = $(e.target);
+  //     $target = $target.closest('.price__item');
+  //     showTooltip($target, tooltip);
+  //   });
 
-    $(this).on('mouseenter', (e) => {
-      let $target = $(e.target);
-      $target = $target.closest('.price__item');
-      showTooltip($target, tooltip);
-    });
-    $(this).on('mouseout', function (e) {
-      let $target = $(e.target);
-      hideTooltip()
-    });
+  //   $(this).on('mouseenter', (e) => {
+  //     let $target = $(e.target);
+  //     $target = $target.closest('.price__item');
+  //     showTooltip($target, tooltip);
+  //   });
+  //   $(this).on('mouseout', function (e) {
+  //     let $target = $(e.target);
+  //     hideTooltip()
+  //   });
 
-  });
+  // });
 };
 
 let tooltipContent = {
@@ -187,9 +198,12 @@ let tooltipContent = {
   ullamcorper leo consequat eu. Donec auctor odio sem`
 }
 
-function hideTooltip(target) {
+
+function hideTooltip(tooltip) {
   tooltip.removeClass('tooltip_active');
   tooltip.find('.tooltip__text_normal').empty();
+
+
 }
 
 
@@ -201,13 +215,19 @@ function showTooltip(target, tooltip) {
   }
 
   //let tooltipHeight = ;
+  console.log(target.position())
   let targetPosition = target.offset().top - tooltip.height() - target.height();//
   //console.log(tooltipHeight)
   //console.log(targetPosition)
   tooltip.find('.tooltip__text_normal').text(tooltipContent.content);
 
-  tooltip.addClass('tooltip_active');
-  tooltip.css('top', targetPosition + 'px');
+  tooltip.css('left', target.position().left - tooltip.width() - 50 + 'px');
+  tooltip.css('top', target.position().top + 'px');
+
+  setTimeout(() => {
+    tooltip.addClass('tooltip_active');
+
+  }, 500)
 }
 
 price.closeTooltipByClick = function () {

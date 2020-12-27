@@ -213,9 +213,9 @@
   transition: all @link-effect;
 
   &_active {
-    opacity  : 1;
-    left     : 50%;
-    transform: translateX(-50%);
+    opacity     : 1;
+    // left     : 50%;
+    // transform: translateX(-50%);
   }
 
   &__text {
@@ -236,9 +236,9 @@
 
   &__img {
     position : absolute;
-    bottom   : 0;
-    left     : 50%;
-    transform: translate(-50%, 50%) rotate(90deg);
+    top      : 25px;
+    right    : calc(0% - 12px);
+    transform: translateX(25%);
   }
 
   &__close {
