@@ -168,7 +168,6 @@ price.showAndHideTooltip = function () {
 
     itemsContainer.hover(
       function (e) {
-        console.log($(e.type))
         $('.price__item').hover(
           function (e) {
             let target = $(e.target);
@@ -180,7 +179,6 @@ price.showAndHideTooltip = function () {
         )
       },
       function (e) {
-        console.log(2);
         let target = $(e.target).closest('.item__price');
         hideTooltip(tooltip);
       }
@@ -226,6 +224,7 @@ price.closeTooltipByClick = function () {
 
 
 function showTooltipByClick(tooltip, target) {
+  if (target.hasClass('price__item_head')) return;
   tooltip.find('.tooltip__text_normal').text(tooltipContent.content);
 
   tooltip.css('left', target.position().left + target.width() / 2 - tooltip.width() / 2 - 50 + 'px');
