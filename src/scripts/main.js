@@ -215,6 +215,7 @@ $('[data-fancybox="gallery"]').fancybox({
 });
 
 //delivery
+import inputHandler from './inputsHandler';
 const agreeLabel = $('.delivery__agree');
 agreeLabel.on('click', function () {
   if ($(this).hasClass('delivery__agree_active')) {
@@ -226,6 +227,15 @@ agreeLabel.on('click', function () {
   $(this).parent().find('input').attr('checked', true);
   $(this).addClass('delivery__agree_active');
 });
+
+inputHandler.btnHandler($('.delivery__btn'), $('.delivery__name'), $('.delivery__phone'));
+
+inputHandler.addError($('.delivery__name'))
+inputHandler.removeErr($('.delivery__name'));
+
+inputHandler.addError($('.delivery__phone'))
+inputHandler.removeErr($('.delivery__phone'));
+
 
 //about
 let cloneContainer = $('.about__gallery-item-clone');
@@ -319,3 +329,20 @@ orderHandler.showModal();
 orderHandler.setAttrChecked();
 orderHandler.setCheckedAttrForRadio();
 orderHandler.setCheckedAttrForRadio();
+
+inputHandler.btnHandler($('.order-form__btn'), $('#user-order-name'), $('#user-order-tel'));
+
+inputHandler.addError($('#user-order-name'))
+inputHandler.removeErr($('#user-order-name'));
+
+inputHandler.addError($('#user-order-tel'))
+inputHandler.removeErr($('#user-order-tel'));
+
+
+inputHandler.btnHandler($('.callback-form__btn'), $('.callback-form__input_name'), $('#user-tel'));
+
+inputHandler.addError($('.callback-form__input_name'))
+inputHandler.removeErr($('.callback-form__input_name'));
+
+inputHandler.addError($('#user-tel'))
+inputHandler.removeErr($('#user-tel'));
