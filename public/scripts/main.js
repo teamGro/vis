@@ -773,8 +773,6 @@
       navClass: ['arrow arrow_prev arrow_prev--about', 'arrow arrow_next'],
       items: 1,
       animateOut: 'slideOutLeft',
-      // animateIn: 'slideInUp',
-      //animateOut: 'fadeOut',
       animateIn: 'fadeIn',
       onInitialized: function (e) {
         $('.about__slider-num').text('1 / ' + this.items().length);
@@ -796,9 +794,11 @@
       let activeImg = allImgs[e.item.index + 1];
       activeImg = activeImg.getAttribute('src');
 
+      cloneImg.attr('src', activeImg);
+      cloneImg.css('opacity', 0);
       setTimeout(() => {
-        cloneImg.attr('src', activeImg);
-      }, 500);
+        cloneImg.css('opacity', 1);
+      }, 300);
     });
     btnModalHandler();
     scrollToNavElem();
