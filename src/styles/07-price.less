@@ -243,9 +243,10 @@
 
   &__close {
     position: absolute;
-    top     : 2px;
-    right   : 5px;
+    top     : -11px;
+    right   : -12px;
     color   : #000;
+    display : block;
 
     &:hover,
     &:focus,
@@ -327,10 +328,12 @@
       &_bold {
         font-weight: 13px;
       }
+
+      &__close {
+        display: none;
+      }
     }
   }
-
-
 }
 
 @media (min-width: 1920px) {

@@ -308,34 +308,30 @@
 
     let itemPrice = $('.price__item');
     price.showAndHideTooltip = function () {
-      itemPrice.hover(
-        function (e) {
-          console.log($(e.target));
-          showTooltip($(e.target), tooltip);
-        },
-        function (e) {
-          console.log(2);
-          hideTooltip(tooltip);
-        }
-      );
-      // itemsContainer.each(function (i) {
-      //   $(this).on('click', (e) => {
-      //     let $target = $(e.target);
-      //     $target = $target.closest('.price__item');
-      //     showTooltip($target, tooltip);
-      //   });
+      if ($(window).width() >= 1200) {
 
-      //   $(this).on('mouseenter', (e) => {
-      //     let $target = $(e.target);
-      //     $target = $target.closest('.price__item');
-      //     showTooltip($target, tooltip);
-      //   });
-      //   $(this).on('mouseout', function (e) {
-      //     let $target = $(e.target);
-      //     hideTooltip()
-      //   });
-
-      // });
+        itemsContainer.hover(
+          function (e) {
+            console.log($(e.type));
+            $('.price__item').hover(
+              function (e) {
+                let target = $(e.target);
+                showTooltip(target, tooltip);
+              },
+              function (e) {
+                hideTooltip(tooltip);
+              }
+            );
+          },
+          function (e) {
+            console.log(2);
+            let target = $(e.target).closest('.item__price');
+            hideTooltip(tooltip);
+          }
+        );
+        return;
+      }
+      price.showTooltipOnMobile();
     };
 
     let tooltipContent = {
@@ -343,27 +339,18 @@
   ullamcorper leo consequat eu. Donec auctor odio sem`
     };
 
-
     function hideTooltip(tooltip) {
       tooltip.removeClass('tooltip_active');
       tooltip.find('.tooltip__text_normal').empty();
-
-
     }
 
-
-
     function showTooltip(target, tooltip) {
+      if (target.hasClass('price__item_head')) return;
       if (tooltip.hasClass('tooltip_active')) {
         tooltip.removeClass('tooltip_active');
         tooltip.find('.tooltip__text_normal').empty();
       }
 
-      //let tooltipHeight = ;
-      console.log(target.position());
-      let targetPosition = target.offset().top - tooltip.height() - target.height();//
-      //console.log(tooltipHeight)
-      //console.log(targetPosition)
       tooltip.find('.tooltip__text_normal').text(tooltipContent.content);
 
       tooltip.css('left', target.position().left - tooltip.width() - 50 + 'px');
@@ -371,13 +358,56 @@
 
       setTimeout(() => {
         tooltip.addClass('tooltip_active');
-
       }, 500);
     }
 
     price.closeTooltipByClick = function () {
-      tooltipCloseBtn.on('click', (e) => {
-        $(e.target).parent().removeClass('tooltip_active');
+      tooltipCloseBtn.on('click', function (e) {
+        console.log(12);
+        $(this).parent().removeClass('tooltip_active');
+      });
+    };
+
+
+    function showTooltipByClick(tooltip, target) {
+      tooltip.find('.tooltip__text_normal').text(tooltipContent.content);
+
+      tooltip.css('left', target.position().left + target.width() / 2 - tooltip.width() / 2 - 50 + 'px');
+      tooltip.css('top', target.position().top + 25 + 'px');
+
+      setTimeout(() => {
+        tooltip.addClass('tooltip_active');
+      }, 500);
+    }
+
+    price.showTooltipOnMobile = function () {
+      if ($(window).width() >= 1200) {
+        return;
+      }
+
+      itemsContainer.on('click', function (e) {
+        let target = $(e.target);
+        if (!target.hasClass('.price__item')) {
+          target = target.closest('.price__item');
+        }
+
+        if ($(this).find('.tooltip_active')) {
+          hideTooltip(tooltip);
+        }
+
+        showTooltipByClick(tooltip, target);
+      });
+    };
+
+    price.resize = function () {
+      $(window).on('resize', () => {
+        if ($(window).width() >= 1200) {
+          price.showAndHideTooltip();
+        } else {
+          if ($(window).width() < 1200) {
+            price.showTooltipOnMobile();
+          }
+        }
       });
     };
 
@@ -803,8 +833,26 @@
     btnModalHandler();
     scrollToNavElem();
     price.setActiveTabAndShowContent();
+    // if ($(window).width() >= 1200) {
+    //   $('.price__list').on('click', () => { return false; })
+    // }
     price.showAndHideTooltip();
+
     price.closeTooltipByClick();
+    if ($(window).width() < 1200) {
+      price.showTooltipOnMobile();
+    }
+
+    $(window).on('resize', () => {
+      if ($(window).width() >= 1200) {
+        price.showAndHideTooltip();
+        $('.price__list').on('click', () => { return false; });
+      } else {
+        if ($(window).width() < 1200) {
+          price.showTooltipOnMobile();
+        }
+      }
+    });
     new orderHandler.CustomSelect({
       elem: document.getElementById("district-select"),
     });
@@ -816,4 +864,4 @@
 
 }());
 
-//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi5qcyIsInNvdXJjZXMiOltdLCJzb3VyY2VzQ29udGVudCI6W10sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OyJ9
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi5qcyIsInNvdXJjZXMiOltdLCJzb3VyY2VzQ29udGVudCI6W10sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OyJ9

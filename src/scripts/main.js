@@ -289,8 +289,26 @@ scrollToNavElem();
 
 import price from './priceHandler';
 price.setActiveTabAndShowContent();
+// if ($(window).width() >= 1200) {
+//   $('.price__list').on('click', () => { return false; })
+// }
 price.showAndHideTooltip();
+
 price.closeTooltipByClick();
+if ($(window).width() < 1200) {
+  price.showTooltipOnMobile();
+}
+
+$(window).on('resize', () => {
+  if ($(window).width() >= 1200) {
+    price.showAndHideTooltip();
+    $('.price__list').on('click', () => { return false; })
+  } else {
+    if ($(window).width() < 1200) {
+      price.showTooltipOnMobile();
+    }
+  }
+})
 
 import orderHandler from './modalOrder';
 new orderHandler.CustomSelect({
