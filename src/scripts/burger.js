@@ -1,3 +1,15 @@
+const btnBurger = $('.burger');
+const btnTopElem = $('.burger__elem_top');
+const btnMiddleElem = $('.burger__elem_middle');
+const btnBottomElem = $('.burger__elem_bottom');
+const mobileMenu = $('.header__menu');
+
+function openCloseMobileMenu() {
+    btnBurger.on('click', function () {
+        burgerHandler($(this), btnTopElem, btnMiddleElem, btnBottomElem, mobileMenu);
+    });
+}
+
 function burgerHandler(burgerElem, btnTopElem, btnMiddleElem, btnBottomElem, mobileMenu) {
     if (burgerElem.hasClass('burger_closed')) {
         btnTopElem.animate();
@@ -35,4 +47,4 @@ function burgerHandler(burgerElem, btnTopElem, btnMiddleElem, btnBottomElem, mob
     }
 }
 
-export default burgerHandler;
+export default openCloseMobileMenu;

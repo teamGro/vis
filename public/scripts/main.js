@@ -1,6 +1,18 @@
 (function () {
     'use strict';
 
+    const btnBurger = $('.burger');
+    const btnTopElem = $('.burger__elem_top');
+    const btnMiddleElem = $('.burger__elem_middle');
+    const btnBottomElem = $('.burger__elem_bottom');
+    const mobileMenu = $('.header__menu');
+
+    function openCloseMobileMenu() {
+        btnBurger.on('click', function () {
+            burgerHandler($(this), btnTopElem, btnMiddleElem, btnBottomElem, mobileMenu);
+        });
+    }
+
     function burgerHandler(burgerElem, btnTopElem, btnMiddleElem, btnBottomElem, mobileMenu) {
         if (burgerElem.hasClass('burger_closed')) {
             btnTopElem.animate();
@@ -64,8 +76,6 @@
         parent.slideDown();
 
     };
-
-    // slider.headerSlider = new Glide('.glide', {
 
     let inputHandler = {};
 
@@ -141,11 +151,11 @@
         btnModalClose.on('click', hideModal);
     }
 
-    const btnBurger = $('.burger');
-    const btnTopElem = $('.burger__elem_top');
-    const btnMiddleElem = $('.burger__elem_middle');
-    const btnBottomElem = $('.burger__elem_bottom');
-    const mobileMenu = $('.header__menu');
+    const btnBurger$1 = $('.burger');
+    const btnTopElem$1 = $('.burger__elem_top');
+    const btnMiddleElem$1 = $('.burger__elem_middle');
+    const btnBottomElem$1 = $('.burger__elem_bottom');
+    const mobileMenu$1 = $('.header__menu');
 
     let navs = $('.navigation__list');
 
@@ -165,17 +175,17 @@
     }
 
     function closeMenuIfNeeded() {
-        if (btnBurger.hasClass('burger_opened')) {
-            btnTopElem.animate();
-            btnMiddleElem.animate({
+        if (btnBurger$1.hasClass('burger_opened')) {
+            btnTopElem$1.animate();
+            btnMiddleElem$1.animate({
                 opacity: 1,
             });
-            btnBottomElem.animate();
+            btnBottomElem$1.animate();
 
-            mobileMenu.removeClass('header__menu_open');
+            mobileMenu$1.removeClass('header__menu_open');
             //sliderElem.play();
 
-            btnBurger.animate().removeClass('burger_opened').addClass('burger_closed');
+            btnBurger$1.animate().removeClass('burger_opened').addClass('burger_closed');
 
             return;
         }
@@ -588,16 +598,7 @@
         });
     };
 
-    const btnBurger$1 = $('.burger');
-    const btnTopElem$1 = $('.burger__elem_top');
-    const btnMiddleElem$1 = $('.burger__elem_middle');
-    const btnBottomElem$1 = $('.burger__elem_bottom');
-    const mobileMenu$1 = $('.header__menu');
-
-    btnBurger$1.on('click', function () {
-      burgerHandler($(this), btnTopElem$1, btnMiddleElem$1, btnBottomElem$1, mobileMenu$1);
-    });
-
+    openCloseMobileMenu();
     const telContainer = $('.header__contacts-expand');
     const expandPhoneBtn = $('.header__tel-btn');
     expandPhoneBtn.on('click', function (e) {
@@ -605,8 +606,12 @@
 
       if ($(this).hasClass('header__tel-btn_active')) {
         telContainer.slideUp();
-        telContainer.empty();
-        $(this).removeClass('header__tel-btn_active');
+
+        setTimeout(() => {
+          telContainer.empty();
+          $(this).removeClass('header__tel-btn_active');
+        }, 300);
+
         return;
       }
 
@@ -614,6 +619,7 @@
       phoneNumsHandler.showAddNumbers(telContainer, phoneNumsHandler.numbers);
     });
 
+    //header slider
     let headerSliderSettings = {
       loop: true,
       items: 1,
@@ -631,6 +637,7 @@
         },
       },
     };
+
     let headerTimerID;
     let headerSlider = $('.header .owl-carousel');
     function setRtlHeader() {
@@ -653,21 +660,14 @@
       let target = $(e.target);
 
       if (target.hasClass('arrow_prev--header')) {
-        console.log(1);
         setRtlHeader();
-        certSliderDirection = 'rtl';
         return;
       }
 
       if (target.hasClass('arrow_next--header')) {
-        console.log(12);
         setLtrHeader();
         certSliderDirection = 'ltr';
         return;
-      }
-
-      if (target.prop('tagName') == 'IMG') {
-        clearTimeout(timer);
       }
     });
 
@@ -680,6 +680,8 @@
       }, 2000);
     }, 1000);
 
+
+    //
     const questionsList = $('.questions__list');
     let activeQuestion = null;
     questionsList.on('click', function (e) {
@@ -924,4 +926,4 @@
 
 }());
 
-//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi5qcyIsInNvdXJjZXMiOltdLCJzb3VyY2VzQ29udGVudCI6W10sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OyJ9
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi5qcyIsInNvdXJjZXMiOltdLCJzb3VyY2VzQ29udGVudCI6W10sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7In0=

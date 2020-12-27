@@ -1,17 +1,8 @@
-import burgerHandler from './burger';
+import openCloseMobileMenu from './burger';
+openCloseMobileMenu();
+
+//
 import phoneNumsHandler from './expandTelNum';
-import slider from './slider';
-
-const btnBurger = $('.burger');
-const btnTopElem = $('.burger__elem_top');
-const btnMiddleElem = $('.burger__elem_middle');
-const btnBottomElem = $('.burger__elem_bottom');
-const mobileMenu = $('.header__menu');
-
-btnBurger.on('click', function () {
-  burgerHandler($(this), btnTopElem, btnMiddleElem, btnBottomElem, mobileMenu);
-});
-
 const telContainer = $('.header__contacts-expand');
 const expandPhoneBtn = $('.header__tel-btn');
 expandPhoneBtn.on('click', function (e) {
@@ -19,8 +10,12 @@ expandPhoneBtn.on('click', function (e) {
 
   if ($(this).hasClass('header__tel-btn_active')) {
     telContainer.slideUp();
-    telContainer.empty();
-    $(this).removeClass('header__tel-btn_active');
+
+    setTimeout(() => {
+      telContainer.empty();
+      $(this).removeClass('header__tel-btn_active');
+    }, 300);
+
     return;
   }
 
@@ -28,6 +23,7 @@ expandPhoneBtn.on('click', function (e) {
   phoneNumsHandler.showAddNumbers(telContainer, phoneNumsHandler.numbers);
 });
 
+//header slider
 let headerSliderSettings = {
   loop: true,
   items: 1,
@@ -45,6 +41,7 @@ let headerSliderSettings = {
     },
   },
 };
+
 let headerTimerID;
 let headerSlider = $('.header .owl-carousel');
 function setRtlHeader() {
@@ -67,21 +64,14 @@ $('.header__slides').on('click', (e) => {
   let target = $(e.target);
 
   if (target.hasClass('arrow_prev--header')) {
-    console.log(1);
     setRtlHeader();
-    certSliderDirection = 'rtl';
     return;
   }
 
   if (target.hasClass('arrow_next--header')) {
-    console.log(12);
     setLtrHeader();
     certSliderDirection = 'ltr';
     return;
-  }
-
-  if (target.prop('tagName') == 'IMG') {
-    clearTimeout(timer);
   }
 });
 
@@ -94,6 +84,8 @@ setTimeout(() => {
   }, 2000);
 }, 1000);
 
+
+//
 const questionsList = $('.questions__list');
 let activeQuestion = null;
 questionsList.on('click', function (e) {
