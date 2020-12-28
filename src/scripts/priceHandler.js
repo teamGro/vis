@@ -229,9 +229,7 @@ function showTooltipByClick(tooltip, target) {
   tooltip.css('left', target.position().left + target.width() / 2 - tooltip.width() / 2 - 50 + 'px');
   tooltip.css('top', target.position().top + 25 + 'px');
 
-  setTimeout(() => {
-    tooltip.addClass('tooltip_active');
-  }, 500);
+  tooltip.addClass('tooltip_active');
 }
 
 price.showTooltipOnMobile = function () {
@@ -250,18 +248,5 @@ price.showTooltipOnMobile = function () {
     }
 
     showTooltipByClick(tooltip, target);
-  });
-};
-
-price.resize = function () {
-  $(window).on('resize', () => {
-    if ($(window).width() >= 1200) {
-      price.showAndHideTooltip();
-      priceC;
-    } else {
-      if ($(window).width() < 1200) {
-        price.showTooltipOnMobile();
-      }
-    }
   });
 };
