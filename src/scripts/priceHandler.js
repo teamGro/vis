@@ -165,7 +165,6 @@ function showContent(target) {
 let itemPrice = $('.price__item');
 price.showAndHideTooltip = function () {
   if ($(window).width() >= 1200) {
-
     itemsContainer.hover(
       function (e) {
         $('.price__item').hover(
@@ -173,16 +172,15 @@ price.showAndHideTooltip = function () {
             let target = $(e.target);
             showTooltip(target, tooltip);
           },
-          function (e) {
+          function () {
             hideTooltip(tooltip);
           }
-        )
+        );
       },
-      function (e) {
-        let target = $(e.target).closest('.item__price');
+      function () {
         hideTooltip(tooltip);
       }
-    )
+    );
     return;
   }
   price.showTooltipOnMobile();
@@ -190,12 +188,16 @@ price.showAndHideTooltip = function () {
 
 let tooltipContent = {
   content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam posuere lacinia ex, vel
-  ullamcorper leo consequat eu. Donec auctor odio sem`
-}
+  ullamcorper leo consequat eu. Donec auctor odio sem`,
+};
 
 function hideTooltip(tooltip) {
-  tooltip.removeClass('tooltip_active');
-  tooltip.find('.tooltip__text_normal').empty();
+  for (let i = 0; i < 10; i++) {
+    if (tooltip.hasClass('tooltip_active')) {
+      tooltip.removeClass('tooltip_active');
+      tooltip.find('.tooltip__text_normal').empty();
+    } else break;
+  }
 }
 
 function showTooltip(target, tooltip) {
@@ -212,16 +214,15 @@ function showTooltip(target, tooltip) {
 
   setTimeout(() => {
     tooltip.addClass('tooltip_active');
-  }, 500)
+  }, 500);
 }
 
 price.closeTooltipByClick = function () {
   tooltipCloseBtn.on('click', function (e) {
-    console.log(12)
+    console.log(12);
     $(this).parent().removeClass('tooltip_active');
-  })
-}
-
+  });
+};
 
 function showTooltipByClick(tooltip, target) {
   if (target.hasClass('price__item_head')) return;
@@ -232,7 +233,7 @@ function showTooltipByClick(tooltip, target) {
 
   setTimeout(() => {
     tooltip.addClass('tooltip_active');
-  }, 500)
+  }, 500);
 }
 
 price.showTooltipOnMobile = function () {
@@ -251,18 +252,18 @@ price.showTooltipOnMobile = function () {
     }
 
     showTooltipByClick(tooltip, target);
-  })
-}
+  });
+};
 
 price.resize = function () {
   $(window).on('resize', () => {
     if ($(window).width() >= 1200) {
       price.showAndHideTooltip();
-      priceC
+      priceC;
     } else {
       if ($(window).width() < 1200) {
         price.showTooltipOnMobile();
       }
     }
-  })
-}
+  });
+};

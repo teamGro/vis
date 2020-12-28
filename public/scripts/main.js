@@ -77,40 +77,76 @@
 
     };
 
+    const questionsList = $('.questions__list');
+    let activeQuestion = null;
+
+    function questionsHandler() {
+      questionsList.on('click', function (e) {
+        let $target = $(e.target);
+        if (!$target.closest('.questions__wrap')) return;
+
+        $target = $target.closest('.questions__wrap');
+        let $parent = $target.parent();
+
+        if (activeQuestion && activeQuestion.attr('data-num') == $parent.attr('data-num')) {
+          activeQuestion.find('.questions__describe').slideUp('slow');
+          $target.removeClass('questions__wrap_open');
+          activeQuestion = null;
+          return;
+        }
+
+        if (activeQuestion) {
+          activeQuestion.find('.questions__describe').slideUp('slow');
+          activeQuestion.find('.questions__wrap_open').removeClass('questions__wrap_open');
+        }
+
+        setTimeout(() => {
+          $target.addClass('questions__wrap_open');
+          $parent.find('.questions__describe').slideDown('slow');
+          activeQuestion = $parent;
+        }, 300);
+      });
+    }
+
     let inputHandler = {};
 
     inputHandler.addError = function (elem) {
-        elem.on('blur', function () {
-            if ($(this).val().trim() == '') {
-                $(this).addClass('input_empty');
-            }
-        });
+      elem.on('blur', function () {
+        if ($(this).val().trim() == '') {
+          $(this).addClass('input_empty');
+        }
+      });
     };
 
     inputHandler.removeErr = function (elem) {
-        elem.on('focus', function () {
-            if ($(this).hasClass('input_empty')) {
-                $(this).removeClass('input_empty');
-            }
-        });
+      elem.on('focus', function () {
+        if ($(this).hasClass('input_empty')) {
+          $(this).removeClass('input_empty');
+        }
+      });
     };
 
     inputHandler.btnHandler = function (btn, elem1, elem2) {
-        btn.on('click', function (e) {
-            let emptyElem = [];
+      btn.on('click', function (e) {
+        let emptyElem = [];
 
-            if (elem1.val().trim() == '') {
-                elem1.addClass('input_empty');
-                emptyElem.push(elem1);
-            }
+        if (elem1.val().trim() == '') {
+          elem1.addClass('input_empty');
+          emptyElem.push(elem1);
+        }
 
-            if (elem2.val().trim() == '') {
-                elem2.addClass('input_empty');
-                emptyElem.push(elem2);
-            }
+        if (elem2.val().trim() == '') {
+          elem2.addClass('input_empty');
+          emptyElem.push(elem2);
+        }
 
-            if (emptyElem.length) return;
-        });
+        if (btn.hasClass('delivery__btn') && $('#user-agree').length && $('#user-agree').attr('checked') != 'true') {
+          console.log('agree');
+          emptyElem.push($('#user-agree'));
+        }
+
+        if (emptyElem.length) return;
+      });
     };
 
     let btnModalTrigger$1 = $('[data-type="callback"]');
@@ -356,7 +392,6 @@
     let itemPrice = $('.price__item');
     price.showAndHideTooltip = function () {
       if ($(window).width() >= 1200) {
-
         itemsContainer.hover(
           function (e) {
             $('.price__item').hover(
@@ -364,13 +399,12 @@
                 let target = $(e.target);
                 showTooltip(target, tooltip);
               },
-              function (e) {
+              function () {
                 hideTooltip(tooltip);
               }
             );
           },
-          function (e) {
-            let target = $(e.target).closest('.item__price');
+          function () {
             hideTooltip(tooltip);
           }
         );
@@ -381,12 +415,16 @@
 
     let tooltipContent = {
       content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam posuere lacinia ex, vel
-  ullamcorper leo consequat eu. Donec auctor odio sem`
+  ullamcorper leo consequat eu. Donec auctor odio sem`,
     };
 
     function hideTooltip(tooltip) {
-      tooltip.removeClass('tooltip_active');
-      tooltip.find('.tooltip__text_normal').empty();
+      for (let i = 0; i < 10; i++) {
+        if (tooltip.hasClass('tooltip_active')) {
+          tooltip.removeClass('tooltip_active');
+          tooltip.find('.tooltip__text_normal').empty();
+        } else break;
+      }
     }
 
     function showTooltip(target, tooltip) {
@@ -412,7 +450,6 @@
         $(this).parent().removeClass('tooltip_active');
       });
     };
-
 
     function showTooltipByClick(tooltip, target) {
       if (target.hasClass('price__item_head')) return;
@@ -679,39 +716,11 @@
         headerTimerID = setTimeout(startMoveLtr, 2000);
       }, 2000);
     }, 1000);
+    questionsHandler();
 
-
-    //
-    const questionsList = $('.questions__list');
-    let activeQuestion = null;
-    questionsList.on('click', function (e) {
-      let $target = $(e.target);
-      if (!$target.closest('.questions__wrap')) return;
-
-      $target = $target.closest('.questions__wrap');
-      let $parent = $target.parent();
-
-      if (activeQuestion && activeQuestion.attr('data-num') == $parent.attr('data-num')) {
-        activeQuestion.find('.questions__describe').slideUp('slow');
-        $target.removeClass('questions__wrap_open');
-        activeQuestion = null;
-        return;
-      }
-
-      if (activeQuestion) {
-        activeQuestion.find('.questions__describe').slideUp('slow');
-        activeQuestion.find('.questions__wrap_open').removeClass('questions__wrap_open');
-      }
-
-      setTimeout(() => {
-        $target.addClass('questions__wrap_open');
-        $parent.find('.questions__describe').slideDown('slow');
-        activeQuestion = $parent;
-      }, 300);
-    });
-
-    let sertSlider = $('.cert .owl-carousel');
-    sertSlider.owlCarousel({
+    //certificates
+    let certSlider = $('.cert .owl-carousel');
+    certSlider.owlCarousel({
       loop: true,
       margin: 10,
       dots: true,
@@ -740,14 +749,14 @@
     let timer;
 
     timer = setTimeout(function startMoveLtr() {
-      sertSlider.trigger('next.owl.carousel');
+      certSlider.trigger('next.owl.carousel');
       timer = setTimeout(startMoveLtr, 1000);
     }, 1000);
 
     function setRtl() {
       window.clearTimeout(timer);
       timer = setTimeout(function f() {
-        sertSlider.trigger('prev.owl.carousel');
+        certSlider.trigger('prev.owl.carousel');
         timer = setTimeout(f, 1000);
       }, 1000);
     }
@@ -755,7 +764,7 @@
     function setLtr() {
       window.clearTimeout(timer);
       timer = setTimeout(function f() {
-        sertSlider.trigger('next.owl.carousel');
+        certSlider.trigger('next.owl.carousel');
         timer = setTimeout(f, 1000);
       }, 1000);
     }
@@ -792,7 +801,6 @@
         arrowRight: `<button data-fancybox-next class="fancybox-button fancybox-button--arrow_right cert__gallery-arrow cert__gallery-arrow_next" title="{{NEXT}}"></button>`,
       },
       afterClose: function () {
-
         if (certSliderDirection == 'ltr') {
           setLtr();
           return;
@@ -821,10 +829,8 @@
     inputHandler.addError($('.delivery__phone'));
     inputHandler.removeErr($('.delivery__phone'));
 
-
     //about
     let cloneContainer = $('.about__gallery-item-clone');
-    let aboutImgContainer = $('.about__gallery-list');
     let imgs = [];
     $('.about__img').each(function (i) {
       imgs.push($(this).attr('src'));
@@ -878,28 +884,14 @@
     btnModalHandler();
     scrollToNavElem();
     price.setActiveTabAndShowContent();
-    // if ($(window).width() >= 1200) {
-    //   $('.price__list').on('click', () => { return false; })
-    // }
     price.showAndHideTooltip();
 
     price.closeTooltipByClick();
     if ($(window).width() < 1200) {
       price.showTooltipOnMobile();
     }
-
-    $(window).on('resize', () => {
-      if ($(window).width() >= 1200) {
-        price.showAndHideTooltip();
-        $('.price__list').on('click', () => { return false; });
-      } else {
-        if ($(window).width() < 1200) {
-          price.showTooltipOnMobile();
-        }
-      }
-    });
     new orderHandler.CustomSelect({
-      elem: document.getElementById("district-select"),
+      elem: document.getElementById('district-select'),
     });
 
     orderHandler.showModal();
@@ -915,7 +907,6 @@
     inputHandler.addError($('#user-order-tel'));
     inputHandler.removeErr($('#user-order-tel'));
 
-
     inputHandler.btnHandler($('.callback-form__btn'), $('.callback-form__input_name'), $('#user-tel'));
 
     inputHandler.addError($('.callback-form__input_name'));
@@ -926,4 +917,4 @@
 
 }());
 
-//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi5qcyIsInNvdXJjZXMiOltdLCJzb3VyY2VzQ29udGVudCI6W10sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7In0=
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi5qcyIsInNvdXJjZXMiOltdLCJzb3VyY2VzQ29udGVudCI6W10sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7In0=

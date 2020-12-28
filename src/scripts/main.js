@@ -84,38 +84,13 @@ setTimeout(() => {
   }, 2000);
 }, 1000);
 
-
 //
-const questionsList = $('.questions__list');
-let activeQuestion = null;
-questionsList.on('click', function (e) {
-  let $target = $(e.target);
-  if (!$target.closest('.questions__wrap')) return;
+import questionsHandler from './questions';
+questionsHandler();
 
-  $target = $target.closest('.questions__wrap');
-  let $parent = $target.parent();
-
-  if (activeQuestion && activeQuestion.attr('data-num') == $parent.attr('data-num')) {
-    activeQuestion.find('.questions__describe').slideUp('slow');
-    $target.removeClass('questions__wrap_open');
-    activeQuestion = null;
-    return;
-  }
-
-  if (activeQuestion) {
-    activeQuestion.find('.questions__describe').slideUp('slow');
-    activeQuestion.find('.questions__wrap_open').removeClass('questions__wrap_open');
-  }
-
-  setTimeout(() => {
-    $target.addClass('questions__wrap_open');
-    $parent.find('.questions__describe').slideDown('slow');
-    activeQuestion = $parent;
-  }, 300);
-});
-
-let sertSlider = $('.cert .owl-carousel');
-sertSlider.owlCarousel({
+//certificates
+let certSlider = $('.cert .owl-carousel');
+certSlider.owlCarousel({
   loop: true,
   margin: 10,
   dots: true,
@@ -144,14 +119,14 @@ sertSlider.owlCarousel({
 let timer;
 
 timer = setTimeout(function startMoveLtr() {
-  sertSlider.trigger('next.owl.carousel');
+  certSlider.trigger('next.owl.carousel');
   timer = setTimeout(startMoveLtr, 1000);
 }, 1000);
 
 function setRtl() {
   window.clearTimeout(timer);
   timer = setTimeout(function f() {
-    sertSlider.trigger('prev.owl.carousel');
+    certSlider.trigger('prev.owl.carousel');
     timer = setTimeout(f, 1000);
   }, 1000);
 }
@@ -159,7 +134,7 @@ function setRtl() {
 function setLtr() {
   window.clearTimeout(timer);
   timer = setTimeout(function f() {
-    sertSlider.trigger('next.owl.carousel');
+    certSlider.trigger('next.owl.carousel');
     timer = setTimeout(f, 1000);
   }, 1000);
 }
@@ -196,7 +171,6 @@ $('[data-fancybox="gallery"]').fancybox({
     arrowRight: `<button data-fancybox-next class="fancybox-button fancybox-button--arrow_right cert__gallery-arrow cert__gallery-arrow_next" title="{{NEXT}}"></button>`,
   },
   afterClose: function () {
-
     if (certSliderDirection == 'ltr') {
       setLtr();
       return;
@@ -222,16 +196,14 @@ agreeLabel.on('click', function () {
 
 inputHandler.btnHandler($('.delivery__btn'), $('.delivery__name'), $('.delivery__phone'));
 
-inputHandler.addError($('.delivery__name'))
+inputHandler.addError($('.delivery__name'));
 inputHandler.removeErr($('.delivery__name'));
 
-inputHandler.addError($('.delivery__phone'))
+inputHandler.addError($('.delivery__phone'));
 inputHandler.removeErr($('.delivery__phone'));
-
 
 //about
 let cloneContainer = $('.about__gallery-item-clone');
-let aboutImgContainer = $('.about__gallery-list');
 let imgs = [];
 $('.about__img').each(function (i) {
   imgs.push($(this).attr('src'));
@@ -283,17 +255,17 @@ aboutSlider.on('changed.owl.carousel', function (e) {
   }, 300);
 });
 
+//
 import btnModalHandler from './modalCallback';
 btnModalHandler();
 
+//
 import scrollToNavElem from './navigateHandler';
 scrollToNavElem();
 
+//price
 import price from './priceHandler';
 price.setActiveTabAndShowContent();
-// if ($(window).width() >= 1200) {
-//   $('.price__list').on('click', () => { return false; })
-// }
 price.showAndHideTooltip();
 
 price.closeTooltipByClick();
@@ -301,20 +273,10 @@ if ($(window).width() < 1200) {
   price.showTooltipOnMobile();
 }
 
-$(window).on('resize', () => {
-  if ($(window).width() >= 1200) {
-    price.showAndHideTooltip();
-    $('.price__list').on('click', () => { return false; })
-  } else {
-    if ($(window).width() < 1200) {
-      price.showTooltipOnMobile();
-    }
-  }
-})
-
+//modal order
 import orderHandler from './modalOrder';
 new orderHandler.CustomSelect({
-  elem: document.getElementById("district-select"),
+  elem: document.getElementById('district-select'),
 });
 
 orderHandler.showModal();
@@ -324,17 +286,16 @@ orderHandler.setCheckedAttrForRadio();
 
 inputHandler.btnHandler($('.order-form__btn'), $('#user-order-name'), $('#user-order-tel'));
 
-inputHandler.addError($('#user-order-name'))
+inputHandler.addError($('#user-order-name'));
 inputHandler.removeErr($('#user-order-name'));
 
-inputHandler.addError($('#user-order-tel'))
+inputHandler.addError($('#user-order-tel'));
 inputHandler.removeErr($('#user-order-tel'));
-
 
 inputHandler.btnHandler($('.callback-form__btn'), $('.callback-form__input_name'), $('#user-tel'));
 
-inputHandler.addError($('.callback-form__input_name'))
+inputHandler.addError($('.callback-form__input_name'));
 inputHandler.removeErr($('.callback-form__input_name'));
 
-inputHandler.addError($('#user-tel'))
+inputHandler.addError($('#user-tel'));
 inputHandler.removeErr($('#user-tel'));
