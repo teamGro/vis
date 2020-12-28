@@ -244,7 +244,11 @@ aboutSlider.on('drag.owl.carousel', (e) => {
 
 let allImgs = $('.about__img');
 aboutSlider.on('changed.owl.carousel', function (e) {
-  $('.about__slider-num').text(e.item.index - 1 + '/' + e.item.count);
+  let sliderNum = $('.about__slider-num');
+  sliderNum.text(e.item.index - 1 + '/' + e.item.count);
+  if (sliderNum.text() == 0) {
+    sliderNum.text(1);
+  }
   let activeImg = allImgs[e.item.index + 1];
   activeImg = activeImg.getAttribute('src');
 
