@@ -21,11 +21,9 @@ function questionsHandler() {
       activeQuestion.find('.questions__wrap_open').removeClass('questions__wrap_open');
     }
 
-    setTimeout(() => {
-      $target.addClass('questions__wrap_open');
-      $parent.find('.questions__describe').slideDown('slow');
-      activeQuestion = $parent;
-    }, 300);
+    $target.addClass('questions__wrap_open');
+    $parent.find('.questions__describe').slideDown('');
+    activeQuestion = $parent;
   });
 }
 
