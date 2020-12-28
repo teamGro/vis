@@ -212,9 +212,7 @@ function showTooltip(target, tooltip) {
   tooltip.css('left', target.position().left - tooltip.width() - 50 + 'px');
   tooltip.css('top', target.position().top + 'px');
 
-  setTimeout(() => {
-    tooltip.addClass('tooltip_active');
-  }, 500);
+  tooltip.addClass('tooltip_active');
 }
 
 price.closeTooltipByClick = function () {
