@@ -245,10 +245,12 @@ aboutSlider.on('drag.owl.carousel', (e) => {
 let allImgs = $('.about__img');
 aboutSlider.on('changed.owl.carousel', function (e) {
   let sliderNum = $('.about__slider-num');
-  sliderNum.text(e.item.index - 1 + '/' + e.item.count);
-  if (sliderNum.text() == 0) {
-    sliderNum.text(1);
+  if (e.item.index - 1 == 0) {
+    sliderNum.text(`${e.item.count}/${e.item.count}`);
+  } else {
+    sliderNum.text(e.item.index - 1 + '/' + e.item.count);
   }
+
   let activeImg = allImgs[e.item.index + 1];
   activeImg = activeImg.getAttribute('src');
 
