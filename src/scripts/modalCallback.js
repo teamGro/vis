@@ -4,37 +4,37 @@ let modal = $('.popup_calback');
 let btnModalClose = $('.popup__close');
 
 function getModalCoordsAndShow() {
-    let topScroll = $(window).scrollTop() + $(window).height() / 2 - modal.height() / 2;
-    modalContainer.addClass('overlay_active');
-    modal.css('transform', `translateY(${topScroll}px)`);
-    modalContainer.css('transform', 'translateX(0)');
+  let topScroll = $(window).scrollTop() + $(window).height() / 2 - modal.height() / 2;
+  if (topScroll < 60) topScroll = 60;
+  modalContainer.addClass('overlay_active');
+  modal.css('transform', `translateY(${topScroll}px)`);
+  modalContainer.css('transform', 'translateX(0)');
 }
 
 function hideModal() {
-    modalContainer.css('transform', 'translateX(-100vw)');
-    modalContainer.removeClass('overlay_active');
+  modalContainer.css('transform', 'translateX(-100vw)');
+  modalContainer.removeClass('overlay_active');
 }
 
 function showOrHideModal() {
-    if (modalContainer.hasClass('overlay_active')) {
-        hideModal();
-        return;
-    }
+  if (modalContainer.hasClass('overlay_active')) {
+    hideModal();
+    return;
+  }
 
-    getModalCoordsAndShow();
+  getModalCoordsAndShow();
 }
 
 function btnModalHandler() {
-    btnModalTrigger.each(function (i) {
-        $(this).on('click', showOrHideModal);
-    });
-    modalCloseByClick();
+  btnModalTrigger.each(function (i) {
+    $(this).on('click', showOrHideModal);
+  });
+  modalCloseByClick();
 }
 
 function modalCloseByClick() {
-    console.log(1)
-    btnModalClose.on('click', hideModal);
+  console.log(1);
+  btnModalClose.on('click', hideModal);
 }
 
 export default btnModalHandler;
-
