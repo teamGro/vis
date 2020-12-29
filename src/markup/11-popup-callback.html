@@ -1,23 +1,18 @@
 <div class="overlay overlay_callback">
-  <div class="popup popup_calback">
+  <div class="popup popup_callback">
     <div class="popup__wrapper">
-      <p class="popup__text">Отправьте заявку и наш менеджер свяжется с вами и проконсультирует по всем вопросам
-        приобретения нашей продукции</p>
-      <form class="popup__form callback-form">
+      <p class="popup__text">Отправьте заявку и наш менеджер свяжется с вами и проконсультирует по всем вопросам приобретения нашей продукции</p>
+      <form class="popup__form callback-form" id="userCallback">
         <div class="callback-form__input-wrap">
-          <input type="text" class="callback-form__input callback-form__input_name input" id="user-name"
-            name="user-name" placeholder="Имя" required />
-          <input type="tel" class="callback-form__input input" id="user-tel" name="user-tel"
-            data-mask="+7 (000) 000 00 00" placeholder="+7 (___) ___ __ __" required />
+          <input type="text" class="callback-form__input callback-form__input_name input" id="user-name" name="user-name" placeholder="Имя" required />
+          <input type="tel" class="callback-form__input input" id="user-tel" name="user-tel" data-mask="+7 (000) 000 00 00" placeholder="+7 (___) ___ __ __" required />
         </div>
 
-        <textarea class="callback-form__textarea input input_textarea" name="" id="" cols="30" rows="10"
-          placeholder="Напишите комментарий"></textarea>
+        <textarea class="callback-form__textarea input input_textarea" name="" id="" cols="30" rows="10" placeholder="Напишите комментарий"></textarea>
 
         <div class="callback-form__wrap">
-          <div style="width: 250px; overflow: hidden" class="callback-form__recaptcha g-recaptcha"
-            data-sitekey="6LcXBxMaAAAAAGe9f-zSGZnWe37u47R1a5_BzLKg"></div>
-          <button class="callback-form__btn popup__btn-send" type="button">Отправить</button>
+          <div style="width: 250px; overflow: hidden" class="callback-form__recaptcha g-recaptcha" data-sitekey="6LcXBxMaAAAAAGe9f-zSGZnWe37u47R1a5_BzLKg"></div>
+          <button class="callback-form__btn popup__btn-send" type="submit">Отправить</button>
         </div>
       </form>
       <button class="popup__close" type="button"></button>

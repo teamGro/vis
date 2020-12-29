@@ -30,10 +30,34 @@ function btnModalHandler() {
     $(this).on('click', showOrHideModal);
   });
   modalCloseByClick();
+  sendUserData('/get-callback');
 }
 
 function modalCloseByClick() {
-  btnModalClose.on('click', hideModal);
+  btnModalClose.on('click', () => {
+    if (!$('.popup__wrapper').hasClass('visually-hidden')) {
+      hideModal();
+      return;
+    }
+    $('.popup__msg-text').remove();
+    $('.popup__wrapper').removeClass('visually-hidden');
+  });
+}
+
+function packUserData() {}
+
+function sendUserData(url) {
+  $('#userCallback').submit(function (event) {
+    console.log($(this).serializeArray());
+    event.preventDefault();
+
+    $.post(url, $(this).serializeArray()).done(function (data) {
+      alert('Data Loaded: ');
+      $('.popup__wrapper').addClass('visually-hidden');
+      // $('.callback-form').css('display', 'none');
+      $('.popup_callback').append('<p class="popup__msg-text">Сообщение успешно отправлено.</p>');
+    });
+  });
 }
 
 export default btnModalHandler;
