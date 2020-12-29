@@ -103,20 +103,58 @@
       });
     }
 
-    function sendData(form, url) {
-      console.log(form);
-      form.on('submit', function (event) {
-        console.log($(this).serializeArray());
-        event.preventDefault();
-        $.post('/post', $(this).serializeArray()).done(function (data) {
-          alert('Data Loaded: ');
-          form.addClass('visually-hidden');
-          console.log($(this));
-          form.parent().find('.popup__text_answer').css('display', 'block');
-          form.parent().find('.popup__text_main').css('display', 'none');
-        });
+    let modalHandler = {};
+
+    let modalContainer = $('.overlay_delivery');
+    let modal = $('.popup_delivery');
+    let btnModalClose = $('.popup__close_delivery');
+
+    modalHandler.sendData = function (form, url) {
+      $.post(url, form.serializeArray()).done(function (data) {
+        if (form.attr('id') == 'formDelivery') {
+          getModalCoordsAndShow(modal, modalContainer);
+          btnModalClose.on('click', () => {
+            hideModal(modalContainer);
+          });
+          return;
+        }
+        form.addClass('visually-hidden');
+        form.parent().find('.popup__text_answer').css('display', 'block');
+        form.parent().find('.popup__text_main').css('display', 'none');
       });
+    };
+
+    modalHandler.recoveryForm = function (btn, form, func) {
+      btn.on('click', () => {
+        if (!form.hasClass('visually-hidden')) {
+          func();
+          return;
+        }
+
+        func();
+
+        setTimeout(() => {
+          form.removeClass('visually-hidden');
+          form.parent().find('.popup__text_answer').css('display', 'none');
+          form.parent().find('.popup__text_main').css('display', 'block');
+        }, 300);
+      });
+    };
+
+    function getModalCoordsAndShow(modal, modalContainer) {
+      let topScroll = $(window).scrollTop() + $(window).height() / 2 - modal.height() / 2;
+      if (topScroll < 60) topScroll = 60;
+      modalContainer.addClass('overlay_active');
+      modal.css('transform', `translateY(${topScroll}px)`);
+      modalContainer.css('transform', 'translateX(0)');
     }
+
+    function hideModal(modalContainer) {
+      modalContainer.css('transform', 'translateX(-100vw)');
+      modalContainer.removeClass('overlay_active');
+    }
+
+    let form = $('#callbackForm');
 
     let inputHandler = {};
 
@@ -136,8 +174,9 @@
       });
     };
 
-    inputHandler.btnHandler = function (btn, elem1, elem2) {
+    inputHandler.btnHandler = function (btn, elem1, elem2, url) {
       btn.on('click', function (e) {
+        e.preventDefault();
         let emptyElem = [];
 
         if (elem1.val().trim() == '') {
@@ -150,58 +189,53 @@
           emptyElem.push(elem2);
         }
 
-        if (btn.hasClass('delivery__btn') && $('#user-agree').length && $('#user-agree').attr('checked') != 'true') {
+        if (btn.hasClass('delivery__btn') && $('#user-agree').prop('checked') != true) {
           emptyElem.push($('#user-agree'));
         }
 
         if (emptyElem.length) return;
-        sendData(btn.parent());
+        modalHandler.sendData(btn.closest('form'), url);
       });
     };
 
     let btnModalTrigger$1 = $('[data-type="callback"]');
-    let modalContainer = $('.overlay_callback');
-    let modal = $('.popup_calback');
-    let btnModalClose = $('.popup__close');
+    let modalContainer$1 = $('.overlay_callback');
+    let modal$1 = $('.popup_calback');
+    let btnModalClose$1 = $('.popup__close');
 
-    function getModalCoordsAndShow() {
-      let topScroll = $(window).scrollTop() + $(window).height() / 2 - modal.height() / 2;
+    function getModalCoordsAndShow$1() {
+      let topScroll = $(window).scrollTop() + $(window).height() / 2 - modal$1.height() / 2;
       if (topScroll < 60) topScroll = 60;
-      modalContainer.addClass('overlay_active');
-      modal.css('transform', `translateY(${topScroll}px)`);
-      modalContainer.css('transform', 'translateX(0)');
+      modalContainer$1.addClass('overlay_active');
+      modal$1.css('transform', `translateY(${topScroll}px)`);
+      modalContainer$1.css('transform', 'translateX(0)');
     }
 
-    function hideModal() {
-      modalContainer.css('transform', 'translateX(-100vw)');
-      modalContainer.removeClass('overlay_active');
+    function hideModal$1() {
+      modalContainer$1.css('transform', 'translateX(-100vw)');
+      modalContainer$1.removeClass('overlay_active');
     }
 
-    function showOrHideModal() {
-      if (modalContainer.hasClass('overlay_active')) {
-        hideModal();
+    function showOrHideModal$1() {
+      if (modalContainer$1.hasClass('overlay_active')) {
+        hideModal$1();
         return;
       }
 
-      getModalCoordsAndShow();
+      getModalCoordsAndShow$1();
     }
 
-    function btnModalHandler() {
+    function btnModalHandler$1() {
       btnModalTrigger$1.each(function (i) {
-        $(this).on('click', showOrHideModal);
+        $(this).on('click', showOrHideModal$1);
       });
-      modalCloseByClick$1();
-      btnSendHandler();
+      modalCloseByClick$2();
+      //btnSendHandler();
     }
 
-    function modalCloseByClick$1() {
-      btnModalClose.on('click', hideModal);
-    }
-
-    function btnSendHandler() {
-      $('.callback-form__btn').on('click', function () {
-        sendData($('#callbackForm'));
-      });
+    let form$1 = $('#callbackForm');
+    function modalCloseByClick$2() {
+      modalHandler.recoveryForm(btnModalClose$1, form$1, hideModal$1);
     }
 
     const btnBurger$1 = $('.burger');
@@ -550,7 +584,8 @@
     let priceList = $('.price__list');
     let orderModalContainer = $('.overlay_order');
     let orderModal = $('.popup_order');
-    let btnModalClose$1 = $('.popup__close_order');
+    let btnModalClose$2 = $('.popup__close_order');
+    let form$2 = $('#orderForm');
 
     orderHandler.showModal = function () {
       priceList.on('click', (e) => {
@@ -560,29 +595,29 @@
           let price = elem.find('.price__price').text();
           $('.order-form__choice').text(name);
           $('.order-form__price').text(price);
-          getModalCoordsAndShow$1();
+          getModalCoordsAndShow$2();
         }
         return;
       });
 
-      btnModalClose$1.on('click', hideModal$1);
+      modalHandler.recoveryForm(btnModalClose$2, form$2, hideModal$2);
     };
 
-    function getModalCoordsAndShow$1() {
+    function getModalCoordsAndShow$2() {
       let topScroll = $(window).scrollTop() + $(window).height() / 2 - orderModal.height() / 2;
       orderModalContainer.addClass('overlay_active');
       orderModal.css('transform', `translateY(${topScroll}px)`);
       orderModalContainer.css('transform', 'translateX(0)');
     }
 
-    function hideModal$1() {
+    function hideModal$2() {
       orderModalContainer.css('transform', 'translateX(-100vw)');
       orderModalContainer.removeClass('overlay_active');
       $('.order-form__choice').text('');
       $('.order-form__price').text('');
     }
 
-    btnModalClose$1.on('click', hideModal$1);
+    btnModalClose$2.on('click', hideModal$2);
 
     const labelRent = $('.order-form__label_rent');
     const labelSnow = $('.order-form__label_snow');
@@ -806,7 +841,7 @@
       $(this).addClass('delivery__agree_active');
     });
 
-    inputHandler.btnHandler($('.delivery__btn'), $('.delivery__name'), $('.delivery__phone'));
+    inputHandler.btnHandler($('.delivery__btn'), $('.delivery__name'), $('.delivery__phone'), '/post-delivery');
 
     inputHandler.addError($('.delivery__name'));
     inputHandler.removeErr($('.delivery__name'));
@@ -871,7 +906,7 @@
         cloneImg.css('opacity', 1);
       }, 300);
     });
-    btnModalHandler();
+    btnModalHandler$1();
     scrollToNavElem();
     price.setActiveTabAndShowContent();
     price.showAndHideTooltip();
@@ -889,7 +924,7 @@
     orderHandler.setCheckedAttrForRadio();
     orderHandler.setCheckedAttrForRadio();
 
-    inputHandler.btnHandler($('.order-form__btn'), $('#user-order-name'), $('#user-order-tel'));
+    inputHandler.btnHandler($('.order-form__btn'), $('#user-order-name'), $('#user-order-tel'), '/post-order');
 
     inputHandler.addError($('#user-order-name'));
     inputHandler.removeErr($('#user-order-name'));
@@ -897,7 +932,7 @@
     inputHandler.addError($('#user-order-tel'));
     inputHandler.removeErr($('#user-order-tel'));
 
-    inputHandler.btnHandler($('.callback-form__btn'), $('.callback-form__input_name'), $('#user-tel'));
+    inputHandler.btnHandler($('.callback-form__btn'), $('.callback-form__input_name'), $('#user-tel'), '/post');
 
     inputHandler.addError($('.callback-form__input_name'));
     inputHandler.removeErr($('.callback-form__input_name'));
@@ -907,4 +942,4 @@
 
 }());
 
-//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi5qcyIsInNvdXJjZXMiOltdLCJzb3VyY2VzQ29udGVudCI6W10sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OzsifQ==
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi5qcyIsInNvdXJjZXMiOltdLCJzb3VyY2VzQ29udGVudCI6W10sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OyJ9

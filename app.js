@@ -21,6 +21,16 @@ app.post('/post', (req, res) => {
   res.send('ok');
 });
 
+app.post('/post-order', (req, res) => {
+  console.log(req.body);
+  res.send('ok');
+});
+
+app.post('/post-delivery', (req, res) => {
+  console.log(req.body);
+  res.send('ok');
+});
+
 app.use(function (req, res) {
   res.status(404);
   res.send('404 - страница не найдена');

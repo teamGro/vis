@@ -1,4 +1,4 @@
-import sendData from './sendData';
+import modalHandler from './sendData';
 let inputHandler = {};
 
 inputHandler.addError = function (elem) {
@@ -17,8 +17,9 @@ inputHandler.removeErr = function (elem) {
   });
 };
 
-inputHandler.btnHandler = function (btn, elem1, elem2) {
+inputHandler.btnHandler = function (btn, elem1, elem2, url) {
   btn.on('click', function (e) {
+    e.preventDefault();
     let emptyElem = [];
 
     if (elem1.val().trim() == '') {
@@ -31,12 +32,12 @@ inputHandler.btnHandler = function (btn, elem1, elem2) {
       emptyElem.push(elem2);
     }
 
-    if (btn.hasClass('delivery__btn') && $('#user-agree').length && $('#user-agree').attr('checked') != 'true') {
+    if (btn.hasClass('delivery__btn') && $('#user-agree').prop('checked') != true) {
       emptyElem.push($('#user-agree'));
     }
 
     if (emptyElem.length) return;
-    sendData(btn.parent());
+    modalHandler.sendData(btn.closest('form'), url);
   });
 };
 

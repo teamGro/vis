@@ -1,4 +1,4 @@
-import sendData from './sendData';
+import modalHandler from './sendData';
 
 let btnModalTrigger = $('[data-type="callback"]');
 let modalContainer = $('.overlay_callback');
@@ -32,17 +32,18 @@ function btnModalHandler() {
     $(this).on('click', showOrHideModal);
   });
   modalCloseByClick();
-  btnSendHandler();
+  //btnSendHandler();
 }
 
+let form = $('#callbackForm');
 function modalCloseByClick() {
-  btnModalClose.on('click', hideModal);
+  modalHandler.recoveryForm(btnModalClose, form, hideModal);
 }
 
-function btnSendHandler() {
-  $('.callback-form__btn').on('click', function () {
-    sendData($('#callbackForm'));
-  });
-}
+// function btnSendHandler() {
+//   $('.callback-form__btn').on('click', function () {
+//     sendData($('#callbackForm'));
+//   });
+//}
 
 export default btnModalHandler;

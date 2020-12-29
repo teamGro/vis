@@ -1,3 +1,4 @@
+import modalHandler from './sendData';
 let orderHandler = {};
 
 orderHandler.CustomSelect = function (options) {
@@ -55,6 +56,7 @@ let priceList = $('.price__list');
 let orderModalContainer = $('.overlay_order');
 let orderModal = $('.popup_order');
 let btnModalClose = $('.popup__close_order');
+let form = $('#orderForm');
 
 orderHandler.showModal = function () {
   priceList.on('click', (e) => {
@@ -69,7 +71,7 @@ orderHandler.showModal = function () {
     return;
   });
 
-  btnModalClose.on('click', hideModal);
+  modalHandler.recoveryForm(btnModalClose, form, hideModal);
 };
 
 function getModalCoordsAndShow() {

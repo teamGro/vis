@@ -193,7 +193,7 @@ agreeLabel.on('click', function () {
   $(this).addClass('delivery__agree_active');
 });
 
-inputHandler.btnHandler($('.delivery__btn'), $('.delivery__name'), $('.delivery__phone'));
+inputHandler.btnHandler($('.delivery__btn'), $('.delivery__name'), $('.delivery__phone'), '/post-delivery');
 
 inputHandler.addError($('.delivery__name'));
 inputHandler.removeErr($('.delivery__name'));
@@ -288,7 +288,7 @@ orderHandler.setAttrChecked();
 orderHandler.setCheckedAttrForRadio();
 orderHandler.setCheckedAttrForRadio();
 
-inputHandler.btnHandler($('.order-form__btn'), $('#user-order-name'), $('#user-order-tel'));
+inputHandler.btnHandler($('.order-form__btn'), $('#user-order-name'), $('#user-order-tel'), '/post-order');
 
 inputHandler.addError($('#user-order-name'));
 inputHandler.removeErr($('#user-order-name'));
@@ -296,7 +296,7 @@ inputHandler.removeErr($('#user-order-name'));
 inputHandler.addError($('#user-order-tel'));
 inputHandler.removeErr($('#user-order-tel'));
 
-inputHandler.btnHandler($('.callback-form__btn'), $('.callback-form__input_name'), $('#user-tel'));
+inputHandler.btnHandler($('.callback-form__btn'), $('.callback-form__input_name'), $('#user-tel'), '/post');
 
 inputHandler.addError($('.callback-form__input_name'));
 inputHandler.removeErr($('.callback-form__input_name'));
