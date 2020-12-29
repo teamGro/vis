@@ -1,3 +1,4 @@
+import sendData from './sendData';
 let inputHandler = {};
 
 inputHandler.addError = function (elem) {
@@ -35,6 +36,7 @@ inputHandler.btnHandler = function (btn, elem1, elem2) {
     }
 
     if (emptyElem.length) return;
+    sendData(btn.parent());
   });
 };
 

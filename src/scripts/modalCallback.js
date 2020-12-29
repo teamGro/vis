@@ -1,3 +1,5 @@
+import sendData from './sendData';
+
 let btnModalTrigger = $('[data-type="callback"]');
 let modalContainer = $('.overlay_callback');
 let modal = $('.popup_calback');
@@ -30,10 +32,17 @@ function btnModalHandler() {
     $(this).on('click', showOrHideModal);
   });
   modalCloseByClick();
+  btnSendHandler();
 }
 
 function modalCloseByClick() {
   btnModalClose.on('click', hideModal);
+}
+
+function btnSendHandler() {
+  $('.callback-form__btn').on('click', function () {
+    sendData($('#callbackForm'));
+  });
 }
 
 export default btnModalHandler;
