@@ -217,7 +217,6 @@ function showTooltip(target, tooltip) {
 
 price.closeTooltipByClick = function () {
   tooltipCloseBtn.on('click', function (e) {
-    console.log(12);
     $(this).parent().removeClass('tooltip_active');
   });
 };

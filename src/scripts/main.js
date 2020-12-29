@@ -185,7 +185,6 @@ import inputHandler from './inputsHandler';
 const agreeLabel = $('.delivery__agree');
 agreeLabel.on('click', function () {
   if ($(this).hasClass('delivery__agree_active')) {
-    console.log(1);
     $(this).parent().find('input').attr('checked', false);
     $(this).removeClass('delivery__agree_active');
     return;
@@ -230,7 +229,6 @@ aboutSlider.owlCarousel({
   animateIn: 'fadeIn',
   onInitialized: function (e) {
     $('.about__slider-num').text('1 / ' + this.items().length);
-    console.log();
   },
 });
 

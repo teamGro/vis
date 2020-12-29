@@ -1,88 +1,85 @@
 <div class="overlay overlay_order">
-    <div class="popup popup_order">
-        <div class="popup__wrapper">
-            <p class="popup__text">Отправьте заявку и наш менеджер свяжется с вами и проконсультирует по всем вопросам
-                приобретения нашей продукции</p>
-            <form action="
-        " class="popup__form order-form">
-                <div class="order-form__top">
-                    <div class="order-form__desc">
-                        Вы выбрали: <br />
-                        <p class="order-form__choice"></p>
-                        <p class="order-form__price"></p>
-                    </div>
-                    <!-- <img src="./img/modal-order.png" alt="" class="order-form__img" /> -->
-                    <div class="order-form__input-wrap">
-                        <input type="text" class="input order-form__input" id="user-order-name" name="user-order-name"
-                            placeholder="Имя" required />
-                        <input type="text" class="input order-form__input" id="user-order-tel" name="user-order-tel"
-                            data-mask="+7 (000) 000 00 00" placeholder="+7 (___) ___ __ __" required />
-                    </div>
-                </div>
-
-                <div id="district-select" class="order-form__select customselect">
-                    <button class="order-form__select-title" type="button">
-                        <span>Выберите район, чтобы узнать стоимость вашей доставки</span>
-                    </button>
-                    <ul>
-                        <!-- значение хранится в свойстве data-value -->
-                        <li data-value="first" class="order-form__option">первый</li>
-                        <li data-value="second" class="order-form__option">второй</li>
-                    </ul>
-                </div>
-
-                <div class="order-form__chk-wrap">
-                    <div class="order-form__chk-left">
-                        <input class="visually-hidden order-form__chk" type="checkbox" id="user-snow" name="user-snow"
-                            checked />
-                        <p class="order-form__label order-form__label_snow order-form__label_snow-active"
-                            for="user-snow">Добавить морозостойкую
-                            добавку</p>
-                    </div>
-                    <div class="order-form__chk-right">
-                        <input class="visually-hidden order-form__chk" type="checkbox" id="user-rent"
-                            name="user-rent" />
-                        <p class="order-form__label order-form__label_rent" for="user-rent">Заказать аренду
-                            бетононасоса</p>
-                    </div>
-                </div>
-
-                <div class="order-form__radio-box">
-                    <p class="order-form__radio-title">Выберите какой объем бетона вы хотите заказать:</p>
-                    <div class="order-form__radio-wrap">
-                        <div class="order-form__radio-container">
-                            <input type="radio" name="user-value" id="user-value1"
-                                class="order-form__radio visually-hidden" />
-                            <p for="user-value1" class="order-form__radio-label">до 15 м3</p>
-                        </div>
-                        <div class="order-form__radio-container">
-                            <input type="radio" name="user-value" id="user-value2"
-                                class="order-form__radio visually-hidden" />
-                            <p for="user-value2" class="order-form__radio-label">от 15 м3 <br />
-                                до 30 м3</p>
-                        </div>
-                        <div class="order-form__radio-container">
-                            <input type="radio" name="user-value" id="user-value3"
-                                class="order-form__radio visually-hidden" />
-                            <p for="user-value3" class="order-form__radio-label">от 30 м3 <br />
-                                до 50 м3</p>
-                        </div>
-                        <div class="order-form__radio-container">
-                            <input type="radio" name="user-value" id="user-value4"
-                                class="order-form__radio visually-hidden" />
-                            <p for="user-value4" class="order-form__radio-label">от 50 м3 <br />
-                                и больше</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="order-form__wrap">
-                    <div style="width: 250px; overflow: hidden" class="callback-form__recaptcha g-recaptcha"
-                        data-sitekey="6LcXBxMaAAAAAGe9f-zSGZnWe37u47R1a5_BzLKg"></div>
-                    <button class="popup__btn-send order-form__btn" type="button">Отправить</button>
-                </div>
-            </form>
-            <button class="popup__close popup__close_order" type="button"></button>
+  <div class="popup popup_order">
+    <div class="popup__wrapper">
+      <p class="popup__text">Отправьте заявку и наш менеджер свяжется с вами и проконсультирует по всем вопросам приобретения нашей продукции</p>
+      <form
+        action="
+        "
+        class="popup__form order-form"
+      >
+        <div class="order-form__top">
+          <div class="order-form__desc">
+            Вы выбрали: <br />
+            <p class="order-form__choice"></p>
+            <p class="order-form__price"></p>
+          </div>
+          <!-- <img src="./img/modal-order.png" alt="" class="order-form__img" /> -->
+          <div class="order-form__input-wrap">
+            <input type="text" class="input order-form__input" id="user-order-name" name="user-order-name" placeholder="Имя" required />
+            <input type="text" class="input order-form__input" id="user-order-tel" name="user-order-tel" data-mask="+7 (000) 000 00 00" placeholder="+7 (___) ___ __ __" required />
+          </div>
         </div>
+
+        <div id="district-select" class="order-form__select customselect">
+          <button class="order-form__select-title" type="button">
+            <span>Выберите район, чтобы узнать стоимость вашей доставки</span>
+          </button>
+          <ul>
+            <!-- значение хранится в свойстве data-value -->
+            <li data-value="first" class="order-form__option">первый</li>
+            <li data-value="second" class="order-form__option">второй</li>
+          </ul>
+        </div>
+
+        <div class="order-form__chk-wrap">
+          <div class="order-form__chk-left">
+            <input class="visually-hidden order-form__chk" type="checkbox" id="user-snow" name="user-snow" checked />
+            <p class="order-form__label order-form__label_snow order-form__label_snow-active" for="user-snow">Добавить морозостойкую добавку</p>
+          </div>
+          <div class="order-form__chk-right">
+            <input class="visually-hidden order-form__chk" type="checkbox" id="user-rent" name="user-rent" />
+            <p class="order-form__label order-form__label_rent" for="user-rent">Заказать аренду бетононасоса</p>
+          </div>
+        </div>
+
+        <div class="order-form__radio-box">
+          <p class="order-form__radio-title">Выберите какой объем бетона вы хотите заказать:</p>
+          <div class="order-form__radio-wrap">
+            <div class="order-form__radio-container">
+              <input type="radio" name="user-value" id="user-value1" class="order-form__radio visually-hidden" />
+              <p for="user-value1" class="order-form__radio-label">до 15 м3</p>
+            </div>
+            <div class="order-form__radio-container">
+              <input type="radio" name="user-value" id="user-value2" class="order-form__radio visually-hidden" />
+              <p for="user-value2" class="order-form__radio-label">
+                от 15 м3 <br />
+                до 30 м3
+              </p>
+            </div>
+            <div class="order-form__radio-container">
+              <input type="radio" name="user-value" id="user-value3" class="order-form__radio visually-hidden" />
+              <p for="user-value3" class="order-form__radio-label">
+                от 30 м3 <br />
+                до 50 м3
+              </p>
+            </div>
+            <div class="order-form__radio-container">
+              <input type="radio" name="user-value" id="user-value4" class="order-form__radio visually-hidden" />
+              <p for="user-value4" class="order-form__radio-label">
+                от 50 м3 <br />
+                и больше
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="order-form__wrap">
+          <div style="width: 250px; overflow: hidden" class="callback-form__recaptcha g-recaptcha" data-sitekey="6LcXBxMaAAAAAGe9f-zSGZnWe37u47R1a5_BzLKg"></div>
+          <button class="popup__btn-send order-form__btn" type="button">Отправить</button>
+        </div>
+        <input type="text" class="order-form__hidden-value visually-hidden" id="user-district" name="user-district" />
+      </form>
+      <button class="popup__close popup__close_order" type="button"></button>
     </div>
+  </div>
 </div>

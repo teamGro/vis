@@ -33,7 +33,6 @@ function btnModalHandler() {
 }
 
 function modalCloseByClick() {
-  console.log(1);
   btnModalClose.on('click', hideModal);
 }
 

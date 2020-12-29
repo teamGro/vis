@@ -31,7 +31,6 @@ inputHandler.btnHandler = function (btn, elem1, elem2) {
     }
 
     if (btn.hasClass('delivery__btn') && $('#user-agree').length && $('#user-agree').attr('checked') != 'true') {
-      console.log('agree');
       emptyElem.push($('#user-agree'));
     }
 
