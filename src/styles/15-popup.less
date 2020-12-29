@@ -1,58 +1,66 @@
 @import './01-variables.less';
 
 .popup {
-  width    : 95vw;
-  margin   : 0 auto;
+  width: 95vw;
+  margin: 0 auto;
   max-width: 700px;
-  padding  : 50px 30px;
+  padding: 50px 30px;
 
   color: #ffffff;
 
-  background-image : url('../img/header-bg-1.jpg');
+  background-image: url('../img/header-bg-1.jpg');
   background-repeat: no-repeat;
-  background-size  : cover;
+  background-size: cover;
 
   &__wrapper {
     position: relative;
 
-    width    : 100%;
+    width: 100%;
     max-width: 500px;
-    margin   : 0 auto;
+    margin: 0 auto;
   }
 
   &__text {
     margin-bottom: 30px;
 
     font-family: Gotham Pro;
-    font-style : normal;
+    font-style: normal;
     font-weight: bold;
-    font-size  : 18px;
+    font-size: 18px;
     line-height: 110%;
-    text-align : center;
+    text-align: center;
+
+    &_answer {
+      display: none;
+    }
+
+    &_main {
+      display: none;
+    }
   }
 
   &__close {
     position: absolute;
-    top     : -45px;
-    right   : -25px;
+    top: -45px;
+    right: -25px;
 
-    width : 40px;
+    width: 40px;
     height: 40px;
 
     &::before,
     &::after {
-      content  : '';
-      position : absolute;
-      top      : 50%;
+      content: '';
+      position: absolute;
+      top: 50%;
       transform: translateY(-50%);
 
-      display         : block;
-      width           : 25px;
-      height          : 4px;
+      display: block;
+      width: 25px;
+      height: 4px;
       transform-origin: center;
 
       background-color: #000;
-      transition      : background-color @link-effect;
+      transition: background-color @link-effect;
     }
 
     &::before {
@@ -76,45 +84,44 @@
     &:hover::before,
     &:focus::before,
     &:active::before {
-      outline         : none;
+      outline: none;
       background-color: #fff;
     }
   }
 
   &__btn-send {
-    max-width    : 220px;
-    margin-top   : 20px;
-    border       : 3px solid #ffffff;
-    box-sizing   : border-box;
+    max-width: 220px;
+    margin-top: 20px;
+    border: 3px solid #ffffff;
+    box-sizing: border-box;
     border-radius: 3px;
-    padding      : 14px 30px;
+    padding: 14px 30px;
 
     font-weight: bold;
-    font-size  : 20px;
+    font-size: 20px;
     line-height: 20px;
-    color      : #ffffff;
+    color: #ffffff;
 
-    transition: color @link-effect, border @link-effect ;
+    transition: color @link-effect, border @link-effect;
 
     &:hover,
     &:focus,
     &:active {
       outline: none;
-      color  : @hover-font-color;
-      border : 3px solid @hover-font-color;
-
+      color: @hover-font-color;
+      border: 3px solid @hover-font-color;
     }
   }
 }
 
 .callback-form {
-  display       : flex;
+  display: flex;
   flex-direction: column;
 
   &__input-wrap {
-    display       : flex;
+    display: flex;
     flex-direction: column;
-    margin-bottom : 30px;
+    margin-bottom: 30px;
   }
 
   &__input_name {
@@ -126,24 +133,24 @@
   }
 
   &__wrap {
-    display       : flex;
+    display: flex;
     flex-direction: column;
-    align-items   : center;
+    align-items: center;
     // overflow: hidden;
   }
 
   &__btn {
-    max-width    : 220px;
-    margin-top   : 20px;
-    border       : 3px solid #ffffff;
-    box-sizing   : border-box;
+    max-width: 220px;
+    margin-top: 20px;
+    border: 3px solid #ffffff;
+    box-sizing: border-box;
     border-radius: 3px;
-    padding      : 14px 30px;
+    padding: 14px 30px;
 
     font-weight: bold;
-    font-size  : 20px;
+    font-size: 20px;
     line-height: 20px;
-    color      : #ffffff;
+    color: #ffffff;
   }
 }
 
@@ -154,7 +161,7 @@
     }
 
     &__input_name {
-      margin-right : auto;
+      margin-right: auto;
       margin-bottom: 0;
     }
 
@@ -163,10 +170,10 @@
     }
 
     &__btn {
-      margin-top   : 0;
-      padding-left : 70px;
+      margin-top: 0;
+      padding-left: 70px;
       padding-right: 70px;
-      margin-left  : auto;
+      margin-left: auto;
     }
   }
 
