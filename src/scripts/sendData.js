@@ -1,13 +1,13 @@
 let modalHandler = {};
 
 let modalContainer = $('.overlay_delivery');
-let modal = $('.popup_delivery');
+let modalDelivery = $('.popup_delivery');
 let btnModalClose = $('.popup__close_delivery');
 
 modalHandler.sendData = function (form, url) {
   $.post(url, form.serializeArray()).done(function (data) {
     if (form.attr('id') == 'formDelivery') {
-      getModalCoordsAndShow(modal, modalContainer);
+      getModalCoordsAndShow(modalDelivery, modalContainer);
       btnModalClose.on('click', () => {
         hideModal(modalContainer);
       });
@@ -16,6 +16,8 @@ modalHandler.sendData = function (form, url) {
     form.addClass('visually-hidden');
     form.parent().find('.popup__text_answer').css('display', 'block');
     form.parent().find('.popup__text_main').css('display', 'none');
+    let modal = form.closest('.popup');
+    modal.css('transform', `translateY(${$(window).scrollTop() + $(window).height() / 2 - modal.height() / 2}px)`);
   });
 };
 
