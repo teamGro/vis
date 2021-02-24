@@ -17,8 +17,15 @@
   }
 
   &__list {
-    display       : flex;
+    display       : none;
     flex-direction: column;
+    opacity       : 0;
+    transition    : opacity .3s @link-effect;
+
+    &_active {
+      display: flex;
+      opacity: 1;
+    }
   }
 
   &__item {
