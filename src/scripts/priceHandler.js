@@ -2,7 +2,7 @@ let price = {};
 
 const tabs = $('.tabs');
 const tooltip = $('.tooltip');
-const itemsContainer = $('.price__list');
+const itemsContainer = $('.price__data');
 const tooltipCloseBtn = $('.tooltip__close');
 
 price.setActiveTabAndShowContent = function () {
@@ -25,7 +25,7 @@ export default price;
 
 function showContent(target) {
   let attr = target.attr('data-tab');
-  console.log(attr)
+  console.log(attr);
   //createMarkup(markup[attr], $('.price__list'));
   $('.price__list_active').removeClass('price__list_active');
   let newActiveItem = $(`[data-group=${attr}]`);
@@ -92,10 +92,11 @@ price.closeTooltipByClick = function () {
 };
 
 function showTooltipByClick(tooltip, target) {
+  console.log(target);
   if (target.hasClass('price__item_head')) return;
   tooltip.find('.tooltip__text_normal').text(tooltipContent.content);
 
-  tooltip.css('left', target.position().left + target.width() / 2 - tooltip.width() / 2 + 'px');
+  tooltip.css('left', target.position().left + target.width() / 2 - tooltip.width() / 2 - 50 + 'px');
   tooltip.css('top', target.position().top + 25 + 'px');
 
   tooltip.addClass('tooltip_active');
